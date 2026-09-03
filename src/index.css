@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface-tint: #0284c7;
+  --color-surface-dim: #e2e8f0;
+  --color-surface-bright: #ffffff;
+  --color-surface-container-high: #f1f5f9;
+  --color-surface-container-low: #f8fafc;
+  --color-navy-dark: #0B192C;
+  --color-navy-card: #12233e;
+  --color-navy-accent: #1E3E62;
+  --color-primary: #0369a1;
+  --color-primary-dark: #075985;
+  --color-primary-light: #e0f2fe;
+  --color-secondary: #0f766e;
+  --color-secondary-light: #ccfbf1;
+  --color-on-surface: #0f172a;
+  --color-on-surface-variant: #475569;
+  --color-outline: #cbd5e1;
+  --color-outline-variant: #e2e8f0;
+  --color-amber-gold: #f59e0b;
+
+  --font-display: "Source Serif 4", serif;
+  --font-headline: "Manrope", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+@utility glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+@utility glass-badge {
+  background: rgba(11, 25, 44, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@utility modal-backdrop {
+  background: rgba(7, 19, 34, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 8px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fcfdfd;
+  color: #0f172a;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
