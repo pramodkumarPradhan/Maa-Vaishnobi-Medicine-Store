@@ -83,32 +83,33 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAppointmentModal }) => {
           </button>
         </div>
 
-        {/* Mobile Hamburger & Fast Action */}
-        <div className="flex items-center gap-2 sm:hidden">
+        {/* Mobile Fast Action & Menu */}
+        <div className="flex items-center gap-1.5 sm:hidden">
           <a
             href={BUSINESS_INFO.phoneTel}
             aria-label="Call Now"
-            className="p-2 rounded-xl bg-sky-50 text-primary border border-sky-200"
+            className="p-2 rounded-xl bg-sky-50/80 text-primary border border-sky-100 active:scale-95 transition-transform"
           >
-            <Phone className="w-5 h-5" />
+            <Phone className="w-4 h-4" />
+          </a>
+          <a
+            href={BUSINESS_INFO.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp Chat"
+            className="p-2 rounded-xl bg-emerald-50/80 text-emerald-600 border border-emerald-100 active:scale-95 transition-transform"
+          >
+            <MessageCircle className="w-4 h-4" />
           </a>
           <button
-            onClick={onOpenAppointmentModal}
-            aria-label="Book Appointment"
-            className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold"
-          >
-            Book
-          </button>
-
-          <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none"
+            className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none active:scale-95"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             )}
           </button>
         </div>

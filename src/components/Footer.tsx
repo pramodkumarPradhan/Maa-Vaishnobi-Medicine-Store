@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
       <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-slate-800">
           {/* Brand & Info */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="lg:col-span-7 space-y-4">
             <a className="inline-block" href="#hero">
               <span className="text-xl font-extrabold text-white tracking-tight font-headline">
                 {BUSINESS_INFO.name}
@@ -43,59 +43,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Navigation Links */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white font-headline">
-              Navigation
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a className="hover:text-white transition-colors" href="#hero">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a className="hover:text-white transition-colors" href="#about">
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-white transition-colors"
-                  href="#services"
-                >
-                  Services
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-white transition-colors"
-                  href="#clinic"
-                >
-                  Clinic
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-white transition-colors"
-                  href="#reviews"
-                >
-                  Reviews
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-white transition-colors"
-                  href="#location"
-                >
-                  Location
-                </a>
-              </li>
-            </ul>
-          </div>
-
           {/* External & Verification Links */}
-          <div className="lg:col-span-4 space-y-3">
+          <div className="lg:col-span-5 space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-widest text-white font-headline">
               Quick Connect
             </h4>

@@ -10,7 +10,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
   return (
     <section
       id="hero"
-      className="relative min-h-[92vh] md:min-h-[96vh] flex items-center pt-24 pb-28 md:pb-36 overflow-hidden"
+      className="relative sm:min-h-[92vh] md:min-h-[96vh] sm:flex sm:items-center pt-24 pb-6 sm:pb-28 md:pb-36 overflow-hidden"
     >
       {/* Background Image Container */}
       <div className="absolute inset-0 z-0">
@@ -24,18 +24,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
       </div>
 
       {/* Hero Content Container */}
-      <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="max-w-3xl space-y-6 text-white">
-          {/* Small Pill Tag */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass-badge text-sky-200 text-xs font-semibold tracking-wider uppercase border border-sky-400/30 shadow-lg">
+      <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
+        <div className="max-w-3xl space-y-4 sm:space-y-6 text-white">
+          {/* Small Pill Tag - Mobile & Desktop variations */}
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full glass-badge text-sky-200 text-[11px] sm:text-xs font-semibold tracking-wider uppercase border border-sky-400/30 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>
+            <span className="hidden sm:inline">
               MAA VAISHNOBI MEDICINE STORE &amp; CLINIC • BALASORE, ODISHA
+            </span>
+            <span className="sm:hidden">
+              Medicine Store &amp; Clinic • Balasore
             </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-[62px] font-bold tracking-tight leading-[1.12] text-white drop-shadow-sm">
+          <h1 className="font-display text-[28px] leading-[1.18] sm:text-5xl lg:text-[62px] font-bold tracking-tight sm:leading-[1.12] text-white drop-shadow-sm">
             Trusted Healthcare, <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-sky-200 to-teal-200">
               Right Here in Balasore.
@@ -43,12 +46,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
           </h1>
 
           {/* Supporting Narrative */}
-          <p className="font-headline text-lg sm:text-xl text-slate-200 max-w-2xl font-normal leading-relaxed text-balance">
+          <p className="font-headline text-sm sm:text-xl text-slate-200 max-w-2xl font-normal leading-relaxed text-balance">
             {BUSINESS_INFO.subtitle}
           </p>
 
-          {/* Quick Contact & Location text */}
-          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-300 pt-1 pb-1">
+          {/* Quick Contact & Location text (Desktop/Tablet only) */}
+          <div className="hidden sm:flex flex-wrap items-center gap-4 text-sm text-slate-300 pt-1 pb-1">
             <a
               href={BUSINESS_INFO.phoneTel}
               className="inline-flex items-center gap-1.5 text-sky-300 font-medium hover:underline"
@@ -65,8 +68,76 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
             </div>
           </div>
 
-          {/* Hero CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+          {/* Mobile Floating Action Card (Max Healthcare Inspired Layout) */}
+          <div className="sm:hidden pt-2">
+            <div className="p-4 rounded-2xl bg-white text-slate-900 shadow-2xl border border-slate-100/90 space-y-3">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-5 h-5 rounded-md bg-sky-100 text-sky-700 flex items-center justify-center">
+                    <Calendar className="w-3 h-3" />
+                  </div>
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-sky-900 font-headline">
+                    Doctor Consultation &amp; Pharmacy
+                  </span>
+                </div>
+                <a
+                  href={BUSINESS_INFO.googleRating.reviewsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200/80"
+                >
+                  <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+                  <span>{BUSINESS_INFO.googleRating.score} ★</span>
+                </a>
+              </div>
+
+              {/* Interactive Field 1: Doctor OPD Select */}
+              <button
+                onClick={onOpenAppointmentModal}
+                className="w-full flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 text-left active:scale-[0.98] transition-transform"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-lg bg-sky-500/10 text-sky-600 flex items-center justify-center">
+                    <Calendar className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider">
+                      OPD Consultation
+                    </span>
+                    <span className="block text-[11px] font-bold text-slate-800">
+                      Select Doctor &amp; Schedule Slot
+                    </span>
+                  </div>
+                </div>
+                <span className="text-[11px] font-extrabold text-sky-600">Book &rarr;</span>
+              </button>
+
+              <div className="flex flex-col gap-2 pt-0.5">
+                <button
+                  onClick={onOpenAppointmentModal}
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 via-primary to-sky-700 hover:from-sky-700 hover:to-primary text-white font-headline text-xs font-extrabold tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg shadow-sky-600/30 active:scale-95 transition-all"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>Book Doctor Appointment</span>
+                </button>
+
+                <a
+                  href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
+                    "Hello Maa Vaishnobi Medicine Store & Clinic, I want to enquire."
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 rounded-xl bg-[#059669] hover:bg-[#047857] text-white font-headline text-xs font-extrabold tracking-wider uppercase flex items-center justify-center gap-2 shadow-md shadow-emerald-700/20 active:scale-95 transition-all"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp Direct Desk</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Hero CTAs (Desktop/Tablet) */}
+          <div className="hidden sm:flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
             <button
               onClick={onOpenAppointmentModal}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary hover:bg-sky-600 text-white font-headline text-sm font-bold tracking-wide uppercase shadow-lg shadow-sky-900/40 hover:shadow-sky-700/60 transition-all duration-200 active:scale-95"
@@ -86,8 +157,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
             </a>
           </div>
 
-          {/* Floating Glass Trust Badge */}
-          <div className="pt-3">
+          {/* Floating Glass Trust Badge (Desktop/Tablet) */}
+          <div className="hidden sm:block pt-3">
             <a
               href={BUSINESS_INFO.googleRating.reviewsUrl}
               target="_blank"
