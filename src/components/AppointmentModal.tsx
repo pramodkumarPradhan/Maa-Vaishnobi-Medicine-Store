@@ -4,7 +4,9 @@ import {
   HEALTH_CONCERNS,
   SPECIALTIES,
   TIME_SLOTS,
+  VISITING_DOCTORS_REGISTRY,
   type HealthConcern,
+  type VisitingDoctor,
 } from "../data/appointmentData";
 import {
   X,
@@ -36,11 +38,13 @@ import {
 interface AppointmentModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialDoctorId?: string | null;
 }
 
 export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   isOpen,
   onClose,
+  initialDoctorId,
 }) => {
   const [step, setStep] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -50,10 +54,27 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>(
     HEALTH_CONCERNS[0].defaultSpecialty
   );
+  const [selectedDoctor, setSelectedDoctor] = useState<VisitingDoctor | null>(
+    null
+  );
   const [preferredDate, setPreferredDate] = useState<string>("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>(
     "Morning (09:30 AM - 12:30 PM)"
   );
+
+  // Initialize selected doctor when initialDoctorId is passed or modal opens
+  useEffect(() => {
+    if (initialDoctorId) {
+      const matched = VISITING_DOCTORS_REGISTRY.find(
+        (d) => d.id === initialDoctorId
+      );
+      if (matched) {
+        setSelectedDoctor(matched);
+        setSelectedSpecialty(`${matched.name} — ${matched.title}`);
+        setStep(2);
+      }
+    }
+  }, [initialDoctorId, isOpen]);
 
   // Form State
   const [patientName, setPatientName] = useState<string>("");
@@ -149,7 +170,16 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
 
   const handleSelectConcern = (concern: HealthConcern) => {
     setSelectedConcern(concern);
-    setSelectedSpecialty(concern.defaultSpecialty);
+    const matchedDoc = VISITING_DOCTORS_REGISTRY.find(
+      (d) => d.specialtyId === concern.id || d.department.toLowerCase().includes(concern.name.toLowerCase().split(" ")[0])
+    );
+    if (matchedDoc) {
+      setSelectedDoctor(matchedDoc);
+      setSelectedSpecialty(`${matchedDoc.name} — ${matchedDoc.title}`);
+    } else {
+      setSelectedDoctor(null);
+      setSelectedSpecialty(concern.defaultSpecialty);
+    }
   };
 
   const handleNextStep = () => {
@@ -186,7 +216,11 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     const reasonText = visitReason.trim() || "General Consultation";
     const notesText = additionalNotes.trim() || "None";
 
-    const messageText = `Hello Maa Vaishnobi Medicine Store & Clinic,\nI would like to request a doctor consultation.\n\nPatient Name: ${patientName.trim()}\nPhone: ${patientPhone.trim()}\nHealth Concern: ${selectedConcern.name}\nDoctor/Specialty: ${selectedSpecialty}\nPreferred Date: ${dateFormatted}\nPreferred Time: ${selectedTimeSlot}\nReason: ${reasonText}\nAdditional Message: ${notesText}\n\nPlease confirm availability.\nThank you.`;
+    const doctorDetailsLine = selectedDoctor
+      ? `Requested Doctor: ${selectedDoctor.name} (${selectedDoctor.title})\nOPD Timing: ${selectedDoctor.availabilityNote}`
+      : `Doctor / Specialty: ${selectedSpecialty}`;
+
+    const messageText = `Hello Maa Vaishnobi Medicine Store & Clinic,\nI would like to request a doctor consultation.\n\nPatient Name: ${patientName.trim()}\nPhone: ${patientPhone.trim()}\nAge/Gender: ${patientAge ? `${patientAge} yrs` : "N/A"} / ${patientGender}\nHealth Concern: ${selectedConcern.name}\n${doctorDetailsLine}\nPreferred Date: ${dateFormatted}\nPreferred Time: ${selectedTimeSlot}\nReason: ${reasonText}\nAdditional Notes: ${notesText}\n\nPlease confirm OPD availability and token number.\nThank you.`;
 
     const encoded = encodeURIComponent(messageText);
     const whatsappUrl = `${BUSINESS_INFO.whatsappUrl}?text=${encoded}`;
@@ -323,54 +357,90 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
             <div className="space-y-4">
               <div>
                 <h4 className="font-display text-lg sm:text-xl font-bold text-slate-900">
-                  Recommended Consultation
+                  Select Visiting Doctor & Specialty
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                  Based on:{" "}
+                  Selected Health Query:{" "}
                   <span className="font-bold text-primary">
                     {selectedConcern.name}
                   </span>
                 </p>
               </div>
 
-              {/* Matched Specialty Card */}
-              <div className="p-4 rounded-2xl bg-sky-50/70 border-2 border-primary/30 space-y-3">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center font-bold shrink-0">
-                      <Stethoscope className="w-6 h-6" />
+              {/* Doctor Card Grid Selector */}
+              <div className="space-y-2 max-h-[300px] overflow-y-auto pr-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+                  Choose Visiting Doctor
+                </label>
+                {VISITING_DOCTORS_REGISTRY.map((doc) => {
+                  const isSelected =
+                    selectedDoctor?.id === doc.id ||
+                    selectedSpecialty.includes(doc.name);
+
+                  return (
+                    <div
+                      key={doc.id}
+                      onClick={() => {
+                        setSelectedDoctor(doc);
+                        setSelectedSpecialty(`${doc.name} — ${doc.title}`);
+                      }}
+                      className={`p-3.5 rounded-2xl border-2 cursor-pointer transition-all flex items-start justify-between gap-3 ${
+                        isSelected
+                          ? "border-primary bg-sky-50/80 shadow-md"
+                          : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div
+                          className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold shrink-0 ${
+                            isSelected
+                              ? "bg-primary text-white"
+                              : "bg-slate-100 text-slate-600"
+                          }`}
+                        >
+                          <Stethoscope className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-bold text-slate-900">
+                              {doc.name}
+                            </span>
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-sky-100 text-sky-800">
+                              {doc.department}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-600 font-medium mt-0.5">
+                            {doc.title} {doc.qualifications && `• ${doc.qualifications}`}
+                          </p>
+                          <p className="text-[11px] text-slate-500 mt-1 flex items-center gap-1 font-mono">
+                            <Clock className="w-3 h-3 text-sky-600" />
+                            <span>{doc.availabilityNote}</span>
+                          </p>
+                        </div>
+                      </div>
+                      {isSelected && (
+                        <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-1" />
+                      )}
                     </div>
-                    <div>
-                      <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-primary text-white">
-                        Recommended Match
-                      </span>
-                      <h5 className="font-display text-base font-bold text-slate-900 mt-1">
-                        {selectedSpecialty}
-                      </h5>
-                      <p className="text-xs text-slate-600">
-                        Visiting OPD Consultant • Maa Vaishnobi Clinic
-                      </p>
-                    </div>
-                  </div>
-                  <CheckCircle2 className="w-6 h-6 text-primary shrink-0" />
-                </div>
-                <p className="text-xs text-slate-600 pt-2 border-t border-sky-100">
-                  Doctor timings and visiting slots will be matched with you upon review of your request.
-                </p>
+                  );
+                })}
               </div>
 
-              {/* Department Selector */}
-              <div className="pt-2">
+              {/* Department Fallback Selector */}
+              <div className="pt-2 border-t border-slate-100">
                 <label
                   htmlFor="specialtySelect"
-                  className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1"
+                  className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1"
                 >
-                  Or Choose Another Department
+                  Or Select Specialty Department
                 </label>
                 <select
                   id="specialtySelect"
                   value={selectedSpecialty}
-                  onChange={(e) => setSelectedSpecialty(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedSpecialty(e.target.value);
+                    setSelectedDoctor(null);
+                  }}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-primary bg-white"
                 >
                   {SPECIALTIES.map((spec) => (

@@ -4,9 +4,9 @@ import { Store, MessageCircle, Phone } from "lucide-react";
 
 export const MedicineStoreFeature: React.FC = () => {
   return (
-    <section className="py-20 md:py-24 bg-[#ffffff]">
+    <section className="py-16 sm:py-24 bg-[#f8fafc] border-b border-slate-200/80">
       <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#0B192C] text-white rounded-3xl p-8 sm:p-12 lg:p-16 shadow-2xl relative overflow-hidden">
+        <div className="bg-gradient-to-br from-emerald-950 via-teal-950 to-slate-900 text-white rounded-3xl p-8 sm:p-12 lg:p-16 shadow-xl border border-emerald-500/20 relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-badge text-sky-300 text-xs font-bold uppercase tracking-wider border border-sky-400/20">

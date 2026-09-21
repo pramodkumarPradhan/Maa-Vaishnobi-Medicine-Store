@@ -13,7 +13,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAppointmentModal }) => {
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
-    { name: "Clinic", href: "#clinic" },
+    { name: "Visiting Doctors", href: "#doctors" },
+    { name: "Clinic OPD", href: "#clinic" },
     { name: "Reviews", href: "#reviews" },
     { name: "Location", href: "#location" },
   ];

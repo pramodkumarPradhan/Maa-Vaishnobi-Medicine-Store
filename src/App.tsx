@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
+import { PhotoGallerySection } from "./components/PhotoGallerySection";
 import { QuickActionBar } from "./components/QuickActionBar";
 import { About } from "./components/About";
 import { Services } from "./components/Services";
 import { MedicineStoreFeature } from "./components/MedicineStoreFeature";
 import { DoctorConsultationFeature } from "./components/DoctorConsultationFeature";
+import { VisitingDoctorsSection } from "./components/VisitingDoctorsSection";
 import { ReviewsSection } from "./components/ReviewsSection";
 import { LocationSection } from "./components/LocationSection";
 import { FinalCTA } from "./components/FinalCTA";
@@ -16,23 +18,29 @@ import { AppointmentModal } from "./components/AppointmentModal";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { Disclaimer } from "./pages/Disclaimer";
 
-const HomePage: React.FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
+const HomePage: React.FC<{
+  onOpenModal: (doctorId?: string) => void;
+}> = ({ onOpenModal }) => {
   return (
     <>
-      <Header onOpenAppointmentModal={onOpenModal} />
+      <Header onOpenAppointmentModal={() => onOpenModal()} />
       <main>
-        <Hero onOpenAppointmentModal={onOpenModal} />
-        <QuickActionBar onOpenAppointmentModal={onOpenModal} />
+        <Hero onOpenAppointmentModal={() => onOpenModal()} />
+        <PhotoGallerySection onOpenAppointmentModal={() => onOpenModal()} />
+        <QuickActionBar onOpenAppointmentModal={() => onOpenModal()} />
         <About />
-        <Services onOpenAppointmentModal={onOpenModal} />
+        <Services onOpenAppointmentModal={() => onOpenModal()} />
+        <DoctorConsultationFeature onOpenAppointmentModal={() => onOpenModal()} />
+        <VisitingDoctorsSection
+          onSelectDoctorToBook={(doctorId) => onOpenModal(doctorId)}
+        />
         <MedicineStoreFeature />
-        <DoctorConsultationFeature onOpenAppointmentModal={onOpenModal} />
         <ReviewsSection />
         <LocationSection />
-        <FinalCTA onOpenAppointmentModal={onOpenModal} />
+        <FinalCTA onOpenAppointmentModal={() => onOpenModal()} />
       </main>
       <Footer />
-      <MobileStickyBar onOpenAppointmentModal={onOpenModal} />
+      <MobileStickyBar onOpenAppointmentModal={() => onOpenModal()} />
     </>
   );
 };
@@ -40,6 +48,17 @@ const HomePage: React.FC<{ onOpenModal: () => void }> = ({ onOpenModal }) => {
 export const App: React.FC = () => {
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] =
     useState<boolean>(false);
+  const [selectedDoctorId, setSelectedDoctorId] = useState<string | null>(null);
+
+  const handleOpenModal = (doctorId?: string) => {
+    setSelectedDoctorId(doctorId || null);
+    setIsAppointmentModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsAppointmentModalOpen(false);
+    setSelectedDoctorId(null);
+  };
 
   return (
     <Router>
@@ -47,11 +66,7 @@ export const App: React.FC = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              <HomePage
-                onOpenModal={() => setIsAppointmentModalOpen(true)}
-              />
-            }
+            element={<HomePage onOpenModal={handleOpenModal} />}
           />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
@@ -59,7 +74,8 @@ export const App: React.FC = () => {
 
         <AppointmentModal
           isOpen={isAppointmentModalOpen}
-          onClose={() => setIsAppointmentModalOpen(false)}
+          initialDoctorId={selectedDoctorId}
+          onClose={handleCloseModal}
         />
       </div>
     </Router>
