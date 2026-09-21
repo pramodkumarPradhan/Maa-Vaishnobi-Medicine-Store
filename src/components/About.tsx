@@ -1,5 +1,4 @@
 import React from "react";
-import { BUSINESS_INFO } from "../data/businessInfo";
 import { Pill, ArrowRight, MapPin, ShieldCheck, Zap, Stethoscope, HeartHandshake } from "lucide-react";
 
 export const About: React.FC = () => {
