@@ -47,11 +47,11 @@ export interface BusinessInfo {
 }
 
 export const BUSINESS_INFO: BusinessInfo = {
-  name: "Maa Vaishnobi Medicine Store & Clinic",
+  name: "Maa Vaishnobi Medicine Store",
   shortName: "Maa Vaishnobi",
-  tagline: "Trusted Healthcare, Right Here in Balasore.",
+  tagline: "Balasore's Trusted 100% Genuine Medicine Store & Specialist OPD Desk.",
   subtitle:
-    "Maa Vaishnobi Medicine Store & Clinic provides convenient access to medicines and doctor consultation support for individuals and families in Balasore.",
+    "Maa Vaishnobi Medicine Store provides 100% genuine prescription medicines, OTC wellness products, surgical items, and specialist doctor OPD consultation support in Balasore.",
   logoUrl: "/images/IMG_8855.PNG",
   phone1: "9827439139",
   phone2: "7847839139",

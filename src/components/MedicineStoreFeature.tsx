@@ -17,21 +17,21 @@ export const MedicineStoreFeature: React.FC<MedicineStoreFeatureProps> = ({
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-badge text-sky-300 text-xs font-bold uppercase tracking-wider border border-sky-400/20">
                 <Store className="w-4 h-4" />
-                <span>PHARMACEUTICAL CARE COUNTER</span>
+                <span>100% GENUINE MEDICINE STORE</span>
               </div>
 
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
-                Your Local Medicine Store in Balasore
+                Balasore's Preferred Local Medicine Store
               </h2>
 
               <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-                Need to check medicine availability or have a pharmacy enquiry? Reach our team directly by phone or WhatsApp. We stock essential medicines and wellness supplies to meet the daily healthcare needs of our community.
+                Need to check medicine availability or have a pharmacy enquiry? Reach our team directly by phone or WhatsApp. We stock 100% genuine prescription medicines, OTC items, and surgical supplies for our community.
               </p>
 
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <a
                   href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
-                    "Hello Maa Vaishnobi Pharmacy, I would like to check availability for a medicine"
+                    "Hello Maa Vaishnobi Medicine Store, I would like to check availability for a medicine"
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"

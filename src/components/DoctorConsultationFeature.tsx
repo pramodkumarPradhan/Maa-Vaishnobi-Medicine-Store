@@ -21,7 +21,7 @@ export const DoctorConsultationFeature: React.FC<
             <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group relative">
               <img
                 src="/images/dr_lopita_nayak.jpg"
-                alt="Dr. Lopita Nayak Skin & VD Specialist consultation at Maa Vaishnobi Clinic Balasore"
+                alt="Dr. Lopita Nayak Skin & VD Specialist consultation at Maa Vaishnobi Medicine Store & Polyclinic Balasore"
                 className="w-full h-[400px] sm:h-[460px] object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-95"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>

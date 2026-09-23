@@ -21,7 +21,7 @@ export const About: React.FC = () => {
               <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-slate-900/80 backdrop-blur-md border border-slate-700/80 text-white">
                 <div className="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
                   <ShieldCheck className="w-4 h-4" />
-                  <span>Licensed Healthcare Desk</span>
+                  <span>Licensed Medicine Store &amp; Pharmacy Desk</span>
                 </div>
                 <p className="text-sm font-semibold text-slate-200 mt-1">
                   100% Genuine Medicines &amp; Specialist OPD Consultations on Jail Road, Balasore.
@@ -36,7 +36,7 @@ export const About: React.FC = () => {
               </div>
               <div>
                 <div className="text-[11px] uppercase tracking-wider font-extrabold text-emerald-800">
-                  Community Healthcare
+                  Community Medicine Store
                 </div>
                 <div className="text-sm font-bold text-slate-900">
                   Trusted by 5,000+ Balasore Families
@@ -50,12 +50,12 @@ export const About: React.FC = () => {
             
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold uppercase tracking-wider border border-emerald-200">
               <Pill className="w-4 h-4 text-emerald-600" />
-              <span>ABOUT MAA VAISHNOBI HEALTHCARE</span>
+              <span>ABOUT MAA VAISHNOBI MEDICINE STORE</span>
             </div>
 
             <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-              Healthcare Made Simple, <br />
-              <span className="text-emerald-600">Right When You Need It.</span>
+              Your Local Genuine Medicine Store, <br />
+              <span className="text-emerald-600">With Specialist Doctor OPDs.</span>
             </h2>
 
             {/* Visual Feature Grid - NO PARAGRAPH WALLS */}

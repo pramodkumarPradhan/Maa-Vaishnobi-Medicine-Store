@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCallModal }) => {
               </span>
             </a>
             <p className="text-sm text-slate-400 leading-relaxed max-w-md">
-              Delivering medicine store services and structured doctor consultation support for residents of Balasore, Gopalgoan, and neighboring Odisha communities.
+              Delivering 100% genuine medicine store services and structured specialist doctor OPD consultation support for residents of Balasore, Gopalgoan, and neighboring Odisha communities.
             </p>
             <div className="space-y-1.5 text-sm pt-1">
               <p className="flex items-center gap-2 text-slate-300">
@@ -46,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCallModal }) => {
                   rel="noopener noreferrer"
                   className="hover:text-white"
                 >
-                  WhatsApp Support Desk
+                  WhatsApp Medicine Desk
                 </a>
               </p>
               <p className="flex items-center gap-2 text-slate-300">

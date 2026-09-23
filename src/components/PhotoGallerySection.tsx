@@ -141,7 +141,7 @@ export const PhotoGallerySection: React.FC<PhotoGalleryProps> = ({
       highlights: [
         "Systematic Batch & Expiry Date Management",
         "Specialist Medicines: Cardio, Neuro, Ortho & Gynaec",
-        "Child Healthcare & Surgical Supplies"
+        "Pediatric & Surgical Medicine Supplies"
       ]
     },
     {
@@ -151,7 +151,7 @@ export const PhotoGallerySection: React.FC<PhotoGalleryProps> = ({
       image: "/images/arun sir.jpeg",
       tag: "Child Specialist OPD",
       badgeIcon: Stethoscope,
-      desc: "Real consultation room of Dr. Arun Kumar Giri (Pediatrician / Child Specialist) at Maa Vaishnobi Healthcare, Jail Road, Balasore.",
+      desc: "Real consultation room of Dr. Arun Kumar Giri (Pediatrician / Child Specialist) at Maa Vaishnobi Medicine Store & Polyclinic, Jail Road, Balasore.",
       location: "OPD Chamber, Jail Road, Balasore",
       timing: "Consultations: 8:30 AM – 8:30 PM",
       highlights: [
@@ -235,7 +235,7 @@ export const PhotoGallerySection: React.FC<PhotoGalleryProps> = ({
               <span>Verified Facility Photo Gallery</span>
             </div>
             <h2 className="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              See Inside Maa Vaishnobi Healthcare
+              See Inside Maa Vaishnobi Medicine Store
             </h2>
             <p className="text-sm sm:text-base text-slate-600 mt-1.5 max-w-2xl leading-relaxed">
               Take a visual tour of our clean clinic exterior, specialist doctor OPD chambers, and medicine inventory.

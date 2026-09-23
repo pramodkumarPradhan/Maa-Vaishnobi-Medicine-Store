@@ -46,7 +46,7 @@ export const PrivacyPolicy: React.FC = () => {
             2. How We Use Your Information
           </h2>
           <p>
-            The information you submit is used solely to coordinate OPD doctor consultations, confirm appointment slots via WhatsApp or phone call, answer pharmacy enquiries, and improve our healthcare service delivery.
+            The information you submit is used solely to coordinate OPD doctor consultations, confirm appointment slots via WhatsApp or phone call, answer pharmacy enquiries, and improve our medicine store &amp; polyclinic service delivery.
           </p>
 
           <h2 className="font-bold text-base text-slate-900 pt-2">

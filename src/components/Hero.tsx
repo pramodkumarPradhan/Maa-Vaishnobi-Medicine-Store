@@ -49,7 +49,7 @@ export const Hero: React.FC<HeroProps> = ({
           <source src="https://pub-c4973073eabf4371adc87585d082efe7.r2.dev/website%20video.mp4" type="video/mp4" />
           <img
             src="/images/hero_background.jpg"
-            alt="Maa Vaishnobi Healthcare Clinic Balasore"
+            alt="Maa Vaishnobi Medicine Store & Clinic Balasore"
             className="w-full h-full object-cover"
           />
         </video>
@@ -68,7 +68,7 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-slate-800/60 mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold uppercase tracking-wider backdrop-blur-md">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>MAA VAISHNOBI HEALTHCARE • BALASORE</span>
+            <span>MAA VAISHNOBI MEDICINE STORE • BALASORE</span>
           </div>
 
           <a
@@ -93,7 +93,7 @@ export const Hero: React.FC<HeroProps> = ({
             
             {/* Main Headline */}
             <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]">
-              Trusted Healthcare &amp; Genuine Medicines <br />
+              100% Genuine Medicine Store &amp; Specialist OPDs <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-sky-300">
                 Right Here in Balasore
               </span>
@@ -102,12 +102,12 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Quick Badges */}
             <div className="flex flex-wrap gap-2.5 pt-1">
               <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-semibold text-emerald-300 backdrop-blur-sm">
-                <Stethoscope className="w-4 h-4 text-emerald-400" />
-                6+ Visiting Specialist OPDs
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                100% Genuine Medicine Store
               </span>
               <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-semibold text-teal-300 backdrop-blur-sm">
-                <ShieldCheck className="w-4 h-4 text-teal-400" />
-                100% Genuine Pharmacy
+                <Stethoscope className="w-4 h-4 text-teal-400" />
+                6+ Visiting Specialist OPDs
               </span>
               <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-semibold text-sky-300 backdrop-blur-sm">
                 <MapPin className="w-4 h-4 text-sky-400" />
@@ -117,7 +117,7 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Minimal Subtitle */}
             <p className="text-slate-300 text-base sm:text-lg font-medium leading-relaxed max-w-xl">
-              Specialist doctor OPD consultation schedule and complete prescription medicine desk available daily.
+              Complete prescription &amp; OTC medicine store counter with visiting specialist doctor OPD consultations daily on Jail Road, Balasore.
             </p>
 
             {/* High Action Buttons */}
@@ -132,7 +132,7 @@ export const Hero: React.FC<HeroProps> = ({
 
               <a
                 href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
-                  "Hello Maa Vaishnobi Healthcare, I need help with doctor booking or prescription medicines."
+                  "Hello Maa Vaishnobi Medicine Store, I need help with prescription medicines or doctor OPD booking."
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -163,7 +163,7 @@ export const Hero: React.FC<HeroProps> = ({
                     <Stethoscope className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white text-base">Polyclinic &amp; Pharmacy</h3>
+                    <h3 className="font-bold text-white text-base">Medicine Store &amp; Polyclinic</h3>
                     <p className="text-xs text-slate-400">Jail Road, Balasore</p>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export const Hero: React.FC<HeroProps> = ({
               >
                 <img
                   src="/images/storefront_main.jpg"
-                  alt="Maa Vaishnobi Healthcare Clinic Video Tour"
+                  alt="Maa Vaishnobi Medicine Store Video Tour"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
                 />
                 <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors"></div>
@@ -208,7 +208,7 @@ export const Hero: React.FC<HeroProps> = ({
 
                 <a
                   href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
-                    "Hello Maa Vaishnobi Healthcare, I need prescription medicines."
+                    "Hello Maa Vaishnobi Medicine Store, I need prescription medicines."
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -232,7 +232,7 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="flex items-center justify-between p-4 border-b border-slate-800 bg-slate-950">
               <h3 className="font-bold text-white flex items-center gap-2 text-sm sm:text-base">
                 <Sparkles className="w-4 h-4 text-emerald-400" />
-                Maa Vaishnobi Healthcare Full Video Tour • Balasore
+                Maa Vaishnobi Medicine Store &amp; Polyclinic Full Video Tour • Balasore
               </h3>
               <button
                 onClick={() => setIsVideoModalOpen(false)}
@@ -245,7 +245,7 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="relative aspect-video w-full bg-black">
               <iframe
                 src="https://pub-c4973073eabf4371adc87585d082efe7.r2.dev/website%20video.mp4"
-                title="Maa Vaishnobi Healthcare Polyclinic & Medicine Store Balasore"
+                title="Maa Vaishnobi Medicine Store & Polyclinic Balasore"
                 className="w-full h-full border-0 object-cover"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -272,7 +272,7 @@ export const Hero: React.FC<HeroProps> = ({
 
           <a
             href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
-              "Hello Maa Vaishnobi Healthcare Desk, I need help with doctor consultation or prescription medicines."
+              "Hello Maa Vaishnobi Medicine Store Desk, I need help with doctor consultation or prescription medicines."
             )}`}
             target="_blank"
             rel="noopener noreferrer"

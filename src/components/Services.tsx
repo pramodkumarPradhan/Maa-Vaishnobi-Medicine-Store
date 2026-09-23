@@ -22,14 +22,14 @@ export const Services: React.FC<ServicesProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
-              COMPREHENSIVE HEALTH SERVICES
+              MEDICINE STORE &amp; CLINIC SERVICES
             </span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-slate-900 mt-2 tracking-tight">
-              Everything You Need, In One Place.
+              Genuine Medicines &amp; Specialist OPDs.
             </h2>
           </div>
           <p className="text-slate-600 text-sm sm:text-base max-w-md font-medium">
-            Combining authentic in-stock medicine supplies with visiting doctor OPD consultations.
+            Combining authentic in-stock prescription medicine supplies with visiting specialist doctor OPD consultations under one roof.
           </p>
         </div>
 

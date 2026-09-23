@@ -16,7 +16,7 @@ import { Footer } from "./components/Footer";
 import { MobileStickyBar } from "./components/MobileStickyBar";
 import { AppointmentModal } from "./components/AppointmentModal";
 import { CallModal } from "./components/CallModal";
-import { PrivacyPolicy } from "./pages/PrivacyPolicy";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy"; 
 import { Disclaimer } from "./pages/Disclaimer";
 
 const HomePage: React.FC<{
