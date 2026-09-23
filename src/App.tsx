@@ -15,32 +15,56 @@ import { FinalCTA } from "./components/FinalCTA";
 import { Footer } from "./components/Footer";
 import { MobileStickyBar } from "./components/MobileStickyBar";
 import { AppointmentModal } from "./components/AppointmentModal";
+import { CallModal } from "./components/CallModal";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { Disclaimer } from "./pages/Disclaimer";
 
 const HomePage: React.FC<{
   onOpenModal: (doctorId?: string) => void;
-}> = ({ onOpenModal }) => {
+  onOpenCallModal: () => void;
+}> = ({ onOpenModal, onOpenCallModal }) => {
   return (
     <>
-      <Header onOpenAppointmentModal={() => onOpenModal()} />
+      <Header
+        onOpenAppointmentModal={() => onOpenModal()}
+        onOpenCallModal={onOpenCallModal}
+      />
       <main>
-        <Hero onOpenAppointmentModal={() => onOpenModal()} />
-        <PhotoGallerySection onOpenAppointmentModal={() => onOpenModal()} />
-        <QuickActionBar onOpenAppointmentModal={() => onOpenModal()} />
+        <Hero
+          onOpenAppointmentModal={() => onOpenModal()}
+          onOpenCallModal={onOpenCallModal}
+        />
+        <PhotoGallerySection
+          onOpenAppointmentModal={() => onOpenModal()}
+          onOpenCallModal={onOpenCallModal}
+        />
+        <QuickActionBar
+          onOpenAppointmentModal={() => onOpenModal()}
+          onOpenCallModal={onOpenCallModal}
+        />
         <About />
-        <Services onOpenAppointmentModal={() => onOpenModal()} />
+        <Services
+          onOpenAppointmentModal={() => onOpenModal()}
+          onOpenCallModal={onOpenCallModal}
+        />
         <DoctorConsultationFeature onOpenAppointmentModal={() => onOpenModal()} />
         <VisitingDoctorsSection
           onSelectDoctorToBook={(doctorId) => onOpenModal(doctorId)}
+          onOpenCallModal={onOpenCallModal}
         />
-        <MedicineStoreFeature />
+        <MedicineStoreFeature onOpenCallModal={onOpenCallModal} />
         <ReviewsSection />
-        <LocationSection />
-        <FinalCTA onOpenAppointmentModal={() => onOpenModal()} />
+        <LocationSection onOpenCallModal={onOpenCallModal} />
+        <FinalCTA
+          onOpenAppointmentModal={() => onOpenModal()}
+          onOpenCallModal={onOpenCallModal}
+        />
       </main>
-      <Footer />
-      <MobileStickyBar onOpenAppointmentModal={() => onOpenModal()} />
+      <Footer onOpenCallModal={onOpenCallModal} />
+      <MobileStickyBar
+        onOpenAppointmentModal={() => onOpenModal()}
+        onOpenCallModal={onOpenCallModal}
+      />
     </>
   );
 };
@@ -48,6 +72,7 @@ const HomePage: React.FC<{
 export const App: React.FC = () => {
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] =
     useState<boolean>(false);
+  const [isCallModalOpen, setIsCallModalOpen] = useState<boolean>(false);
   const [selectedDoctorId, setSelectedDoctorId] = useState<string | null>(null);
 
   const handleOpenModal = (doctorId?: string) => {
@@ -60,13 +85,26 @@ export const App: React.FC = () => {
     setSelectedDoctorId(null);
   };
 
+  const handleOpenCallModal = () => {
+    setIsCallModalOpen(true);
+  };
+
+  const handleCloseCallModal = () => {
+    setIsCallModalOpen(false);
+  };
+
   return (
     <Router>
       <div className="min-h-screen flex flex-col font-body bg-[#fcfdfd] text-[#0f172a]">
         <Routes>
           <Route
             path="/"
-            element={<HomePage onOpenModal={handleOpenModal} />}
+            element={
+              <HomePage
+                onOpenModal={handleOpenModal}
+                onOpenCallModal={handleOpenCallModal}
+              />
+            }
           />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
@@ -76,6 +114,11 @@ export const App: React.FC = () => {
           isOpen={isAppointmentModalOpen}
           initialDoctorId={selectedDoctorId}
           onClose={handleCloseModal}
+        />
+
+        <CallModal
+          isOpen={isCallModalOpen}
+          onClose={handleCloseCallModal}
         />
       </div>
     </Router>

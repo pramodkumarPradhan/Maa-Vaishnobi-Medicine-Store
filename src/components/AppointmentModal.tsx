@@ -391,15 +391,23 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                       }`}
                     >
                       <div className="flex items-start gap-3">
-                        <div
-                          className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold shrink-0 ${
-                            isSelected
-                              ? "bg-primary text-white"
-                              : "bg-slate-100 text-slate-600"
-                          }`}
-                        >
-                          <Stethoscope className="w-5 h-5" />
-                        </div>
+                        {doc.photoUrl ? (
+                          <img
+                            src={doc.photoUrl}
+                            alt={doc.name}
+                            className="w-11 h-11 rounded-xl object-cover shrink-0 border border-slate-200 shadow-sm"
+                          />
+                        ) : (
+                          <div
+                            className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold shrink-0 ${
+                              isSelected
+                                ? "bg-primary text-white"
+                                : "bg-slate-100 text-slate-600"
+                            }`}
+                          >
+                            <Stethoscope className="w-5 h-5" />
+                          </div>
+                        )}
                         <div>
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-bold text-slate-900">
@@ -616,7 +624,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                         setPatientPhone(e.target.value);
                         if (e.target.value.trim()) setPhoneError(false);
                       }}
-                      placeholder="e.g. 09853608262"
+                      placeholder="e.g. 9827439139"
                       className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:ring-2 focus:ring-primary ${
                         phoneError
                           ? "border-red-500 ring-2 ring-red-200"

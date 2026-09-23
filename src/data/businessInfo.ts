@@ -3,12 +3,19 @@ export interface BusinessInfo {
   shortName: string;
   tagline: string;
   subtitle: string;
+  logoUrl: string;
+  phone1: string;
+  phone2: string;
   phoneDisplay: string;
   phoneRaw: string;
   phoneTel: string;
+  phone1Tel: string;
+  phone2Tel: string;
+  phones: string[];
   whatsappDisplay: string;
   whatsappRaw: string;
   whatsappUrl: string;
+  whatsappUrl2: string;
   address: {
     street: string;
     locality: string;
@@ -45,12 +52,19 @@ export const BUSINESS_INFO: BusinessInfo = {
   tagline: "Trusted Healthcare, Right Here in Balasore.",
   subtitle:
     "Maa Vaishnobi Medicine Store & Clinic provides convenient access to medicines and doctor consultation support for individuals and families in Balasore.",
-  phoneDisplay: "098536 08262",
-  phoneRaw: "09853608262",
-  phoneTel: "tel:09853608262",
-  whatsappDisplay: "+91 98536 08262",
-  whatsappRaw: "919853608262",
-  whatsappUrl: "https://wa.me/919853608262",
+  logoUrl: "/images/IMG_8855.PNG",
+  phone1: "9827439139",
+  phone2: "7847839139",
+  phoneDisplay: "9827439139, 7847839139",
+  phoneRaw: "9827439139",
+  phoneTel: "tel:9827439139",
+  phone1Tel: "tel:9827439139",
+  phone2Tel: "tel:7847839139",
+  phones: ["9827439139", "7847839139"],
+  whatsappDisplay: "+91 98274 39139 / +91 78478 39139",
+  whatsappRaw: "919827439139",
+  whatsappUrl: "https://wa.me/919827439139",
+  whatsappUrl2: "https://wa.me/917847839139",
   address: {
     street: "Jail Rd",
     locality: "Manikhamb",

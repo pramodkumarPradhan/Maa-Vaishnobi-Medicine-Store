@@ -4,10 +4,15 @@ import { Calendar, MessageCircle, Phone, MapPin, Star, Play, X, ShieldCheck, Ste
 
 interface HeroProps {
   onOpenAppointmentModal: () => void;
+  onOpenCallModal?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
+export const Hero: React.FC<HeroProps> = ({
+  onOpenAppointmentModal,
+  onOpenCallModal,
+}) => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [showHelpTooltip, setShowHelpTooltip] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
@@ -39,9 +44,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
             e.currentTarget.muted = true;
             e.currentTarget.play().catch(() => {});
           }}
-          className="w-full h-full object-cover opacity-40 scale-105 pointer-events-none transition-opacity duration-1000"
+          className="w-full h-full object-cover opacity-60 scale-105 pointer-events-none transition-opacity duration-1000"
         >
-          <source src="/videos/hero_clinic_loop.mp4" type="video/mp4" />
+          <source src="https://pub-c4973073eabf4371adc87585d082efe7.r2.dev/website%20video.mp4" type="video/mp4" />
           <img
             src="/images/hero_background.jpg"
             alt="Maa Vaishnobi Healthcare Clinic Balasore"
@@ -50,8 +55,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
         </video>
         
         {/* Dark Gradient Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/60"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/60 to-slate-950/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-slate-950/40"></div>
       </div>
 
       {/* Ambient Glow */}
@@ -138,10 +143,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
               </a>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-slate-400 pt-1">
-              <Phone className="w-4 h-4 text-emerald-400" />
-              <span>Direct Hotline: <strong className="text-white font-bold">{BUSINESS_INFO.phoneDisplay}</strong></span>
-            </div>
+            <button
+              onClick={onOpenCallModal}
+              className="flex items-center gap-2 text-xs text-slate-400 pt-1 hover:text-white transition-colors group cursor-pointer text-left"
+            >
+              <Phone className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+              <span>Direct Hotline: <strong className="text-white font-bold underline underline-offset-2 decoration-emerald-500">{BUSINESS_INFO.phoneDisplay}</strong> (Click to call)</span>
+            </button>
           </div>
 
           {/* Right Floating Video Card Trigger & Quick Desk */}
@@ -171,7 +179,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
                 className="group relative aspect-video w-full rounded-2xl overflow-hidden border border-slate-700 cursor-pointer shadow-lg"
               >
                 <img
-                  src="/images/hero_background.jpg"
+                  src="/images/storefront_main.jpg"
                   alt="Maa Vaishnobi Healthcare Clinic Video Tour"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
                 />
@@ -207,7 +215,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
                   className="p-3 rounded-xl bg-slate-800/90 hover:bg-emerald-500/20 border border-slate-700 hover:border-emerald-500/50 text-left transition-all group"
                 >
                   <span className="block text-[10px] uppercase tracking-wider font-bold text-slate-400">Pharmacy Desk</span>
-                  <span className="block text-xs font-bold text-white group-hover:text-emerald-300">Order Online &rarr;</span>
+                  <span className="block text-xs font-bold text-white group-hover:text-emerald-300">Inquiry Online &rarr;</span>
                 </a>
               </div>
 
@@ -236,14 +244,43 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAppointmentModal }) => {
             
             <div className="relative aspect-video w-full bg-black">
               <iframe
-                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0"
+                src="https://pub-c4973073eabf4371adc87585d082efe7.r2.dev/website%20video.mp4"
                 title="Maa Vaishnobi Healthcare Polyclinic & Medicine Store Balasore"
-                className="w-full h-full border-0"
+                className="w-full h-full border-0 object-cover"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Floating Yellow "Need Help?" Chat/Help Popup Widget */}
+      {showHelpTooltip && (
+        <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-2.5 animate-bounce">
+          <div className="relative bg-amber-400 text-slate-950 px-3.5 py-2 rounded-2xl text-xs font-extrabold shadow-2xl flex items-center gap-2 border border-amber-300">
+            <span>Need help? Just ask</span>
+            <button
+              onClick={() => setShowHelpTooltip(false)}
+              className="hover:opacity-75 p-0.5"
+              title="Dismiss"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+            <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-amber-400 rotate-45"></div>
+          </div>
+
+          <a
+            href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
+              "Hello Maa Vaishnobi Healthcare Desk, I need help with doctor consultation or prescription medicines."
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 flex items-center justify-center shadow-2xl border-2 border-white transition-all active:scale-95 shrink-0"
+            title="Chat with Us on WhatsApp"
+          >
+            <MessageCircle className="w-6 h-6 text-slate-950 fill-slate-950/20" />
+          </a>
         </div>
       )}
     </section>

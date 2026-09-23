@@ -18,13 +18,32 @@ export const DoctorConsultationFeature: React.FC<
           
           {/* Left Column: Visual Photo with Badge */}
           <div className="lg:col-span-6 relative order-2 lg:order-1">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group">
+            <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group relative">
               <img
-                src="/images/doctor_consultation.jpg"
-                alt="Doctor consultation session at Maa Vaishnobi Clinic Balasore"
-                className="w-full h-[400px] sm:h-[460px] object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90"
+                src="/images/dr_lopita_nayak.jpg"
+                alt="Dr. Lopita Nayak Skin & VD Specialist consultation at Maa Vaishnobi Clinic Balasore"
+                className="w-full h-[400px] sm:h-[460px] object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-95"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+
+              {/* Floating Featured Doctor Overlay Badge */}
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-slate-950/90 backdrop-blur-md p-2.5 pr-4 rounded-2xl border border-slate-800 shadow-2xl flex items-center gap-3">
+                <img
+                  src="/images/dr_lopita_nayak.jpg"
+                  alt="Dr. Lopita Nayak"
+                  className="w-12 h-12 rounded-xl object-cover border-2 border-rose-500 shrink-0 shadow-md"
+                />
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span className="text-[10px] font-extrabold text-rose-300 uppercase tracking-wider">
+                      Visiting Doctor OPD
+                    </span>
+                  </div>
+                  <div className="text-xs font-extrabold text-white">Dr. Lopita Nayak</div>
+                  <div className="text-[10px] font-medium text-slate-300">Skin &amp; VD Specialist</div>
+                </div>
+              </div>
             </div>
 
             {/* Bottom Floating OPD Specialty Pill Bar */}

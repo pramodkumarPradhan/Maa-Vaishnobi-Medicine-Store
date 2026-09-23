@@ -195,6 +195,7 @@ export const VISITING_DOCTORS_REGISTRY: VisitingDoctor[] = [
     iconName: "Sparkles",
     avatarBg: "from-rose-500 to-pink-600",
     avatarInitials: "LN",
+    photoUrl: "/images/dr_lopita_nayak.jpg",
   },
   {
     id: "doc-arun-kumar-giri",
@@ -212,6 +213,7 @@ export const VISITING_DOCTORS_REGISTRY: VisitingDoctor[] = [
     iconName: "Baby",
     avatarBg: "from-sky-500 to-blue-600",
     avatarInitials: "AG",
+    photoUrl: "/images/dr_arun_kumar_giri.jpg",
   },
   {
     id: "doc-rasmita-behera",
@@ -228,6 +230,7 @@ export const VISITING_DOCTORS_REGISTRY: VisitingDoctor[] = [
     iconName: "UserCheck",
     avatarBg: "from-purple-500 to-indigo-600",
     avatarInitials: "RB",
+    photoUrl: "/images/dr_rasmita_behera.jpg",
   },
   {
     id: "doc-ajit-kumar-rath",
@@ -244,6 +247,7 @@ export const VISITING_DOCTORS_REGISTRY: VisitingDoctor[] = [
     iconName: "HeartPulse",
     avatarBg: "from-pink-500 to-rose-600",
     avatarInitials: "AR",
+    photoUrl: "/images/dr_ajit_kumar_rath.jpg",
   },
   {
     id: "doc-sangram-keshari-panda",
@@ -260,6 +264,7 @@ export const VISITING_DOCTORS_REGISTRY: VisitingDoctor[] = [
     iconName: "Activity",
     avatarBg: "from-amber-500 to-orange-600",
     avatarInitials: "SP",
+    photoUrl: "/images/dr_sangram_keshari_panda.jpg",
   },
   {
     id: "doc-jaydev-giri",
@@ -276,6 +281,7 @@ export const VISITING_DOCTORS_REGISTRY: VisitingDoctor[] = [
     iconName: "Activity",
     avatarBg: "from-indigo-600 to-blue-700",
     avatarInitials: "JG",
+    photoUrl: "/images/dr_jaydev_giri.jpg",
   },
 ];
 

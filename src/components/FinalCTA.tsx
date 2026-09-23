@@ -4,10 +4,12 @@ import { Calendar, MessageCircle } from "lucide-react";
 
 interface FinalCTAProps {
   onOpenAppointmentModal: () => void;
+  onOpenCallModal?: () => void;
 }
 
 export const FinalCTA: React.FC<FinalCTAProps> = ({
   onOpenAppointmentModal,
+  onOpenCallModal,
 }) => {
   return (
     <section className="py-16 md:py-20 bg-gradient-to-r from-sky-900 via-[#0B192C] to-[#12233e] text-white">
@@ -42,12 +44,12 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({
 
         <div className="text-sm text-slate-300 pt-2">
           Direct Desk:{" "}
-          <a
-            href={BUSINESS_INFO.phoneTel}
-            className="text-sky-300 font-bold hover:underline"
+          <button
+            onClick={onOpenCallModal}
+            className="text-sky-300 font-bold hover:underline cursor-pointer"
           >
-            +91 {BUSINESS_INFO.phoneDisplay}
-          </a>
+            {BUSINESS_INFO.phoneDisplay}
+          </button>
         </div>
       </div>
     </section>

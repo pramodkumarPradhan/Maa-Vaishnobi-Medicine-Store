@@ -2,7 +2,13 @@ import React from "react";
 import { BUSINESS_INFO } from "../data/businessInfo";
 import { MapPin, Clock, Phone, Navigation, MessageCircle, Map } from "lucide-react";
 
-export const LocationSection: React.FC = () => {
+interface LocationSectionProps {
+  onOpenCallModal?: () => void;
+}
+
+export const LocationSection: React.FC<LocationSectionProps> = ({
+  onOpenCallModal,
+}) => {
   return (
     <section id="location" className="py-20 md:py-28 bg-[#ffffff]">
       <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +70,7 @@ export const LocationSection: React.FC = () => {
                     Direct Contact Desk
                   </h4>
                   <p className="text-slate-600 text-sm mt-0.5 font-medium">
-                    +91 {BUSINESS_INFO.phoneDisplay}
+                    {BUSINESS_INFO.phoneDisplay}
                   </p>
                 </div>
               </div>
@@ -82,13 +88,13 @@ export const LocationSection: React.FC = () => {
                 <span>GET DIRECTIONS</span>
               </a>
 
-              <a
-                href={BUSINESS_INFO.phoneTel}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-headline text-sm font-bold tracking-wide uppercase transition-all shadow-md active:scale-95"
+              <button
+                onClick={onOpenCallModal}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-headline text-sm font-bold tracking-wide uppercase transition-all shadow-md active:scale-95 cursor-pointer"
               >
                 <Phone className="w-4 h-4" />
                 <span>CALL NOW</span>
-              </a>
+              </button>
 
               <a
                 href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(

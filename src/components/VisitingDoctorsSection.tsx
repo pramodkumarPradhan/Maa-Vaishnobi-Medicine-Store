@@ -21,10 +21,12 @@ import {
 
 interface VisitingDoctorsSectionProps {
   onSelectDoctorToBook: (doctorId: string) => void;
+  onOpenCallModal?: () => void;
 }
 
 export const VisitingDoctorsSection: React.FC<VisitingDoctorsSectionProps> = ({
   onSelectDoctorToBook,
+  onOpenCallModal,
 }) => {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -187,15 +189,23 @@ export const VisitingDoctorsSection: React.FC<VisitingDoctorsSectionProps> = ({
                 {/* Doctor Avatar Header */}
                 <div className="flex items-center gap-3.5 mb-3">
                   <div className="relative">
-                    <div
-                      className={`w-12 h-12 rounded-full bg-gradient-to-br ${
-                        doc.avatarBg || "from-emerald-600 to-teal-700"
-                      } p-0.5 shadow-sm shrink-0 flex items-center justify-center font-bold text-white text-sm`}
-                    >
-                      <div className="w-full h-full rounded-full bg-slate-900/30 flex items-center justify-center font-extrabold tracking-wider text-white">
-                        {doc.avatarInitials || "DR"}
+                    {doc.photoUrl ? (
+                      <img
+                        src={doc.photoUrl}
+                        alt={doc.name}
+                        className="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-rose-500 shadow-md shrink-0 ring-2 ring-rose-100"
+                      />
+                    ) : (
+                      <div
+                        className={`w-12 h-12 rounded-full bg-gradient-to-br ${
+                          doc.avatarBg || "from-emerald-600 to-teal-700"
+                        } p-0.5 shadow-sm shrink-0 flex items-center justify-center font-bold text-white text-sm`}
+                      >
+                        <div className="w-full h-full rounded-full bg-slate-900/30 flex items-center justify-center font-extrabold tracking-wider text-white">
+                          {doc.avatarInitials || "DR"}
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-600 rounded-full border-2 border-white flex items-center justify-center text-[8px] font-bold text-white">
                       ✓
                     </div>
@@ -285,13 +295,13 @@ export const VisitingDoctorsSection: React.FC<VisitingDoctorsSectionProps> = ({
               </p>
             </div>
           </div>
-          <a
-            href={BUSINESS_INFO.phoneTel}
-            className="shrink-0 px-4 py-2 rounded-xl bg-white text-slate-900 hover:bg-slate-100 font-headline text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md active:scale-95 transition-all"
+          <button
+            onClick={onOpenCallModal}
+            className="shrink-0 px-4 py-2 rounded-xl bg-white text-slate-900 hover:bg-slate-100 font-headline text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
           >
             <Phone className="w-3.5 h-3.5 text-emerald-600" />
             <span>Call Reception: {BUSINESS_INFO.phoneDisplay}</span>
-          </a>
+          </button>
         </div>
       </div>
     </section>

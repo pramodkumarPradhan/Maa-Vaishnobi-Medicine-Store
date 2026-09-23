@@ -2,7 +2,13 @@ import React from "react";
 import { BUSINESS_INFO } from "../data/businessInfo";
 import { Store, MessageCircle, Phone } from "lucide-react";
 
-export const MedicineStoreFeature: React.FC = () => {
+interface MedicineStoreFeatureProps {
+  onOpenCallModal?: () => void;
+}
+
+export const MedicineStoreFeature: React.FC<MedicineStoreFeatureProps> = ({
+  onOpenCallModal,
+}) => {
   return (
     <section className="py-16 sm:py-24 bg-[#f8fafc] border-b border-slate-200/80">
       <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,13 +41,13 @@ export const MedicineStoreFeature: React.FC = () => {
                   <span>WHATSAPP ENQUIRY</span>
                 </a>
 
-                <a
-                  href={BUSINESS_INFO.phoneTel}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary hover:bg-sky-500 text-white font-headline text-sm font-bold tracking-wide uppercase transition-all shadow-md active:scale-95"
+                <button
+                  onClick={onOpenCallModal}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary hover:bg-sky-500 text-white font-headline text-sm font-bold tracking-wide uppercase transition-all shadow-md active:scale-95 cursor-pointer"
                 >
                   <Phone className="w-4 h-4" />
                   <span>CALL NOW</span>
-                </a>
+                </button>
               </div>
 
               <p className="text-xs text-slate-400 pt-2 italic border-t border-slate-800">
@@ -52,9 +58,9 @@ export const MedicineStoreFeature: React.FC = () => {
             <div className="lg:col-span-5">
               <div className="rounded-2xl overflow-hidden shadow-xl border border-slate-700/60">
                 <img
-                  src="/images/pharmacy_interior.jpg"
+                  src="/images/pharmacist_counter.jpg"
                   alt="Maa Vaishnobi medicine store counter in Balasore"
-                  className="w-full h-80 lg:h-96 object-cover object-center"
+                  className="w-full h-80 lg:h-96 object-cover object-top"
                 />
               </div>
             </div>

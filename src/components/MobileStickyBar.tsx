@@ -4,12 +4,14 @@ import { Home, UserCheck, Calendar, MessageCircle, Phone } from "lucide-react";
 
 interface MobileStickyBarProps {
   onOpenAppointmentModal: () => void;
+  onOpenCallModal?: () => void;
 }
 
 type TabId = "home" | "clinic" | "book" | "chat" | "call";
 
 export const MobileStickyBar: React.FC<MobileStickyBarProps> = ({
   onOpenAppointmentModal,
+  onOpenCallModal,
 }) => {
   const [activeTab, setActiveTab] = useState<TabId>("home");
   const isNavigatingRef = useRef(false);
@@ -118,14 +120,16 @@ export const MobileStickyBar: React.FC<MobileStickyBarProps> = ({
         <span className="text-[10px] font-bold mt-0.5 tracking-tight">Chat</span>
       </a>
 
-      <a
-        href={BUSINESS_INFO.phoneTel}
-        onClick={() => handleTabClick("call")}
+      <button
+        onClick={() => {
+          handleTabClick("call");
+          if (onOpenCallModal) onOpenCallModal();
+        }}
         className={getTabClass("call")}
       >
         <Phone className={getIconClass("call")} />
         <span className="text-[10px] font-bold mt-0.5 tracking-tight">Call</span>
-      </a>
+      </button>
     </aside>
   );
 };

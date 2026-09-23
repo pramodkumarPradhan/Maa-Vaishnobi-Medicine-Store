@@ -4,10 +4,12 @@ import { Pill, Stethoscope, Headphones, ArrowRight, Phone, MessageCircle, CheckC
 
 interface ServicesProps {
   onOpenAppointmentModal: () => void;
+  onOpenCallModal?: () => void;
 }
 
 export const Services: React.FC<ServicesProps> = ({
   onOpenAppointmentModal,
+  onOpenCallModal,
 }) => {
   return (
     <section
@@ -152,9 +154,9 @@ export const Services: React.FC<ServicesProps> = ({
               </div>
 
               <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <a
-                  href={BUSINESS_INFO.phoneTel}
-                  className="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 flex items-center justify-between group transition-all"
+                <button
+                  onClick={onOpenCallModal}
+                  className="p-4 rounded-2xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 flex items-center justify-between group transition-all text-left cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold">
@@ -166,7 +168,7 @@ export const Services: React.FC<ServicesProps> = ({
                     </div>
                   </div>
                   <span className="text-xs font-bold text-emerald-700 group-hover:translate-x-1 transition-transform">Call &rarr;</span>
-                </a>
+                </button>
 
                 <a
                   href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(

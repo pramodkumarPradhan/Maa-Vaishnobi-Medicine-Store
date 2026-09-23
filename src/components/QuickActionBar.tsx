@@ -4,10 +4,12 @@ import { Calendar, MessageCircle, Phone, Navigation } from "lucide-react";
 
 interface QuickActionBarProps {
   onOpenAppointmentModal: () => void;
+  onOpenCallModal?: () => void;
 }
 
 export const QuickActionBar: React.FC<QuickActionBarProps> = ({
   onOpenAppointmentModal,
+  onOpenCallModal,
 }) => {
   return (
     <div className="relative z-20 max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 -mt-2 sm:-mt-16 md:-mt-20 mb-8 sm:mb-16">
@@ -53,9 +55,9 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
         </a>
 
         {/* Action 3: Call Now */}
-        <a
-          href={BUSINESS_INFO.phoneTel}
-          className="group flex flex-col sm:flex-row items-center sm:items-start p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-blue-50/70 hover:bg-blue-100/70 border border-blue-100/80 transition-all duration-200 active:scale-95 shadow-sm"
+        <button
+          onClick={onOpenCallModal}
+          className="group flex flex-col sm:flex-row items-center sm:items-start p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-blue-50/70 hover:bg-blue-100/70 border border-blue-100/80 transition-all duration-200 text-left active:scale-95 shadow-sm"
         >
           <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center mb-1.5 sm:mb-0 sm:mr-3 shadow-md shadow-blue-600/25 group-hover:scale-105 transition-transform shrink-0">
             <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -68,7 +70,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
               CALL HELPLINE
             </span>
           </div>
-        </a>
+        </button>
 
         {/* Action 4: Get Directions */}
         <a

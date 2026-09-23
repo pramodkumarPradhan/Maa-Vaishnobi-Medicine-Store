@@ -11,8 +11,8 @@ export const About: React.FC = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group">
               <img
-                src="/images/pharmacy_interior.jpg"
-                alt="Maa Vaishnobi Healthcare pharmacy interior in Balasore"
+                src="/images/storefront_main.jpg"
+                alt="Maa Vaishnobi Medicine Store & Clinic storefront on Jail Road, Balasore"
                 className="w-full h-[420px] sm:h-[480px] object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
@@ -30,7 +30,7 @@ export const About: React.FC = () => {
             </div>
 
             {/* Floating Counter Badge */}
-            <div className="hidden sm:flex absolute -bottom-5 -right-5 bg-white p-4 rounded-2xl shadow-xl border border-slate-200 items-center gap-3">
+            <div className="hidden sm:flex absolute -bottom-5 -right-5 bg-white p-4 rounded-2xl shadow-xl border border-slate-200 items-center gap-5">
               <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold shrink-0">
                 <HeartHandshake className="w-6 h-6" />
               </div>
