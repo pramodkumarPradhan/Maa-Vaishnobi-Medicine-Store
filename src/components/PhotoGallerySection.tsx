@@ -86,7 +86,7 @@ export const PhotoGallerySection: React.FC<PhotoGalleryProps> = ({
       image: "/images/storefront_main.jpg",
       tag: "Main Store Entrance",
       badgeIcon: Building2,
-      desc: "Original storefront banner & customer service counter located at Jail Road, Manikhamb, Balasore.",
+      desc: "Modern storefront banner & customer service counter located at Jail Road, Manikhamb, Balasore.",
       location: "Jail Road, Manikhamb, Balasore",
       timing: "Open Daily: 7:30 AM – 10:30 PM",
       highlights: [
@@ -105,7 +105,6 @@ export const PhotoGallerySection: React.FC<PhotoGalleryProps> = ({
       desc: "Prompt prescription billing, customer support, and computerized medicine availability search.",
       location: "Main Counter, Pharmacy Section",
       timing: "7:30 AM – 10:30 PM",
-      imagePosition: "object-[center_15%]", // Elevate head & torso position higher up in frame
       highlights: [
         "Expert Consultation on Dosage & Usage",
         "Computerized Prescription Billing",

@@ -179,7 +179,7 @@ export const Hero: React.FC<HeroProps> = ({
                 className="group relative aspect-video w-full rounded-2xl overflow-hidden border border-slate-700 cursor-pointer shadow-lg"
               >
                 <img
-                  src="/images/storefront_main.jpg"
+                  src="/images/storefront_main2.jpg"
                   alt="Maa Vaishnobi Medicine Store Video Tour"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
                 />

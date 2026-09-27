@@ -17,8 +17,8 @@ export const Header: React.FC<HeaderProps> = ({
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
-    { name: "Visiting Doctors", href: "#doctors" },
     { name: "Clinic OPD", href: "#clinic" },
+    { name: "Visiting Doctors", href: "#doctors" },
     { name: "Reviews", href: "#reviews" },
     { name: "Location", href: "#location" },
   ];
