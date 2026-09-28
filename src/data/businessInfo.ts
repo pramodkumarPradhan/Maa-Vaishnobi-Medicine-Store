@@ -1,6 +1,7 @@
 export interface BusinessInfo {
   name: string;
   shortName: string;
+  websiteUrl: string;
   tagline: string;
   subtitle: string;
   logoUrl: string;
@@ -47,11 +48,12 @@ export interface BusinessInfo {
 }
 
 export const BUSINESS_INFO: BusinessInfo = {
-  name: "Maa Vaishnobi Medicine Store",
+  name: "Maa Vaishnobi Medicine Store & Clinic",
   shortName: "Maa Vaishnobi",
-  tagline: "Balasore's Trusted 100% Genuine Medicine Store & Specialist OPD Desk.",
+  websiteUrl: "https://www.maavaishnobimedicinestoreandclinic.com",
+  tagline: "Balasore's Trusted 100% Genuine Medicine Store & Specialist OPD Clinic.",
   subtitle:
-    "Maa Vaishnobi Medicine Store provides 100% genuine prescription medicines, OTC wellness products, surgical items, and specialist doctor OPD consultation support in Balasore.",
+    "Maa Vaishnobi Medicine Store & Clinic provides 100% genuine prescription medicines, OTC wellness products, surgical items, and specialist doctor OPD consultation support in Balasore.",
   logoUrl: "/images/IMG_8855.PNG",
   phone1: "9827439139",
   phone2: "7847839139",
