@@ -78,8 +78,8 @@ export const BUSINESS_INFO: BusinessInfo = {
     fullFormatted: "Jail Rd, Manikhamb, Balasore, Gopalgoan, Odisha 756001",
   },
   googleRating: {
-    score: 4.9,
-    reviewsCount: 258,
+    score: 5.0,
+    reviewsCount: 268,
     reviewsUrl: "https://share.google/zfefBHNG8L8KhDjk5",
     starsDisplay: "★★★★★",
   },

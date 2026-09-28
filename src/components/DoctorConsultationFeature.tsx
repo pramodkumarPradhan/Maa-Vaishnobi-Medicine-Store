@@ -1,5 +1,5 @@
 import React from "react";
-import { UserCheck, Stethoscope, Calendar, ArrowRight, CheckCircle2, MessageCircle, FileText } from "lucide-react";
+import { UserCheck, Stethoscope, Calendar, ArrowRight, CheckCircle2, MessageCircle, FileText, Sparkles } from "lucide-react";
 
 interface DoctorConsultationFeatureProps {
   onOpenAppointmentModal: () => void;
@@ -11,126 +11,129 @@ export const DoctorConsultationFeature: React.FC<
   return (
     <section
       id="clinic"
-      className="py-16 md:py-24 bg-slate-100/70 border-t border-slate-200/80"
+      className="py-12 sm:py-16 bg-white border-t border-slate-200/80"
     >
       <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Visual Photo with Badge */}
-          <div className="lg:col-span-6 relative order-2 lg:order-1">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group relative">
+          {/* Left Column: Clean Doctor Consultation Card */}
+          <div className="lg:col-span-6 relative">
+            <div className="rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900 group relative">
               <img
                 src="/images/dr_lopita_nayak.jpg"
                 alt="Dr. Lopita Nayak Skin & VD Specialist consultation at Maa Vaishnobi Medicine Store & Polyclinic Balasore"
-                className="w-full h-[400px] sm:h-[460px] object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-95"
+                className="w-full h-[360px] sm:h-[420px] object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-95"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
 
-              {/* Floating Featured Doctor Overlay Badge */}
-              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-slate-950/90 backdrop-blur-md p-2.5 pr-4 rounded-2xl border border-slate-800 shadow-2xl flex items-center gap-3">
+              {/* Top Doctor Badge */}
+              <div className="absolute top-4 left-4 sm:top-5 sm:left-5 bg-slate-900/90 backdrop-blur-md p-2.5 pr-4 rounded-2xl border border-slate-700 shadow-xl flex items-center gap-3">
                 <img
                   src="/images/dr_lopita_nayak.jpg"
                   alt="Dr. Lopita Nayak"
-                  className="w-12 h-12 rounded-xl object-cover border-2 border-rose-500 shrink-0 shadow-md"
+                  className="w-11 h-11 rounded-xl object-cover border-2 border-emerald-400 shrink-0 shadow-md"
                 />
                 <div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span className="text-[10px] font-extrabold text-rose-300 uppercase tracking-wider">
-                      Visiting Doctor OPD
+                    <span className="text-[10px] font-extrabold text-emerald-300 uppercase tracking-wider">
+                      VISITING SPECIALIST OPD
                     </span>
                   </div>
                   <div className="text-xs font-extrabold text-white">Dr. Lopita Nayak</div>
-                  <div className="text-[10px] font-medium text-slate-300">Skin &amp; VD Specialist</div>
+                  <div className="text-[10px] font-medium text-slate-300">Skin &amp; VD Specialist • Balasore</div>
                 </div>
               </div>
-            </div>
 
-            {/* Bottom Floating OPD Specialty Pill Bar */}
-            <div className="absolute -bottom-5 left-4 right-4 sm:left-6 sm:right-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-200 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 font-bold">
-                <Stethoscope className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800">
-                  Daily OPD Schedule (6+ Visiting Specialists)
+              {/* Bottom Schedule Pill Inside Container */}
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200 flex items-center gap-3 shadow-lg">
+                <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                  <Stethoscope className="w-5 h-5" />
                 </div>
-                <div className="text-xs font-bold text-slate-900 flex flex-wrap gap-1 mt-0.5">
-                  <span>Skin &amp; VD</span> • <span>Pediatrics</span> • <span>Neuro Psychiatry</span> • <span>O&amp;G</span> • <span>Oncology</span>
+                <div>
+                  <div className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800 flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-emerald-600" />
+                    <span>Daily OPD Schedule (6+ Visiting Specialists)</span>
+                  </div>
+                  <div className="text-xs font-bold text-slate-900 mt-0.5">
+                    Skin &amp; VD • Pediatrics • Neuro Psychiatry • O&amp;G • Oncology
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: MINIMAL TEXT 3-Step Process */}
-          <div className="lg:col-span-6 space-y-5 order-1 lg:order-2">
+          {/* Right Column: Crisp White 3-Step Process */}
+          <div className="lg:col-span-6 space-y-5">
             
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider">
-              <UserCheck className="w-4 h-4 text-emerald-600" />
-              <span>SIMPLE 3-STEP APPOINTMENT</span>
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider">
+                <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span>SIMPLE 3-STEP APPOINTMENT</span>
+              </div>
+
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                Need to See a Specialist? <br />
+                <span className="text-emerald-600">Book in 3 Easy Steps</span>
+              </h2>
             </div>
 
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-              Need to See a Specialist? <br />
-              <span className="text-emerald-600">Book in 3 Easy Steps</span>
-            </h2>
-
-            {/* 3-Step Visual Cards - NO PARAGRAPH WALLS */}
-            <div className="space-y-3 pt-1">
+            {/* 3 Crisp White Step Cards */}
+            <div className="space-y-2.5">
               
-              {/* Step 1 */}
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center gap-4 hover:border-emerald-300 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white font-black text-sm flex items-center justify-center shrink-0">
+              {/* Step 01 */}
+              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-emerald-500/50 hover:bg-emerald-50/40 transition-colors flex items-center gap-3.5 shadow-xs">
+                <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-md shadow-emerald-600/20">
                   01
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-emerald-600" />
-                    Pick Doctor Specialty
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>Select Doctor Specialty</span>
                   </h4>
-                  <p className="text-xs text-slate-600 mt-0.5">Select Skin, Pediatrics, Neuro, O&amp;G, Oncology or Urology.</p>
+                  <p className="text-[11px] text-slate-600 mt-0.5 truncate">Skin, Pediatrics, Neuro, O&amp;G, Oncology or Urology</p>
                 </div>
               </div>
 
-              {/* Step 2 */}
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center gap-4 hover:border-emerald-300 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white font-black text-sm flex items-center justify-center shrink-0">
+              {/* Step 02 */}
+              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-emerald-500/50 hover:bg-emerald-50/40 transition-colors flex items-center gap-3.5 shadow-xs">
+                <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-md shadow-emerald-600/20">
                   02
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                    <MessageCircle className="w-4 h-4 text-emerald-600" />
-                    Send Quick WhatsApp Request
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>Send Quick WhatsApp Request</span>
                   </h4>
-                  <p className="text-xs text-slate-600 mt-0.5">Your enquiry routes instantly to our clinic front desk.</p>
+                  <p className="text-[11px] text-slate-600 mt-0.5 truncate">Routes directly to our front desk for instant processing</p>
                 </div>
               </div>
 
-              {/* Step 3 */}
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center gap-4 hover:border-emerald-300 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-slate-900 text-white font-black text-sm flex items-center justify-center shrink-0">
+              {/* Step 03 */}
+              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-emerald-500/50 hover:bg-emerald-50/40 transition-colors flex items-center gap-3.5 shadow-xs">
+                <div className="w-9 h-9 rounded-xl bg-slate-900 text-white font-extrabold text-xs flex items-center justify-center shrink-0">
                   03
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    Get Token &amp; Slot Confirmation
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>Get Token &amp; Slot Confirmation</span>
                   </h4>
-                  <p className="text-xs text-slate-600 mt-0.5">Reception verifies consultation time &amp; reserves your token.</p>
+                  <p className="text-[11px] text-slate-600 mt-0.5 truncate">Reception verifies timing &amp; reserves your token number</p>
                 </div>
               </div>
 
             </div>
 
-            {/* CTA Button */}
+            {/* Crisp CTA Button */}
             <div className="pt-2">
               <button
                 onClick={onOpenAppointmentModal}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg active:scale-95 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-emerald-600/20 active:scale-95 transition-all cursor-pointer"
               >
-                <Calendar className="w-4 h-4" />
+                <Calendar className="w-4 h-4 text-white" />
                 <span>BOOK SPECIALIST DOCTOR APPOINTMENT</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 text-white" />
               </button>
             </div>
 
@@ -141,4 +144,3 @@ export const DoctorConsultationFeature: React.FC<
     </section>
   );
 };
-

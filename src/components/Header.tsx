@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import { BUSINESS_INFO } from "../data/businessInfo";
-import { Phone, MessageCircle, Calendar, Menu, X, ChevronDown } from "lucide-react";
+import { Phone, MessageCircle, Calendar, Menu, X, ChevronDown, ShoppingBag } from "lucide-react";
 
 interface HeaderProps {
   onOpenAppointmentModal: () => void;
   onOpenCallModal?: () => void;
+  onOpenOrderMedicineModal?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onOpenAppointmentModal,
   onOpenCallModal,
+  onOpenOrderMedicineModal,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { name: "Home", href: "#hero" },
+    { name: "Order(5km)", href: "#order-medicine-5km" },
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
-    { name: "Clinic OPD", href: "#clinic" },
-    { name: "Visiting Doctors", href: "#doctors" },
+    { name: "Doctors", href: "#doctors" },
     { name: "Reviews", href: "#reviews" },
     { name: "Location", href: "#location" },
   ];
@@ -80,27 +82,25 @@ export const Header: React.FC<HeaderProps> = ({
             <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-primary group-hover:translate-y-0.5 transition-transform" />
           </button>
 
-          {/* WhatsApp Direct Action */}
-          <a
-            href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
-              "Hello Maa Vaishnobi Medicine Store & Clinic, I have an enquiry."
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#059669] hover:bg-[#047857] text-white text-xs font-bold tracking-wide uppercase shadow-sm active:scale-95 transition-all whitespace-nowrap"
-          >
-            <MessageCircle className="w-4 h-4" />
-            <span>WhatsApp</span>
-          </a>
-
-          {/* Book Appointment CTA */}
+          {/* Book Appointment Primary CTA */}
           <button
             onClick={onOpenAppointmentModal}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold tracking-wide uppercase shadow-md shadow-sky-600/20 active:scale-95 transition-all whitespace-nowrap cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-extrabold tracking-wide uppercase shadow-md shadow-sky-600/25 active:scale-95 transition-all whitespace-nowrap cursor-pointer"
           >
             <Calendar className="w-4 h-4" />
             <span>Book Appointment</span>
           </button>
+
+          {/* Order Online Medicine Secondary CTA */}
+          {onOpenOrderMedicineModal && (
+            <button
+              onClick={onOpenOrderMedicineModal}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-800 hover:text-emerald-700 border border-slate-200/90 hover:border-emerald-300 text-xs font-bold tracking-wide uppercase active:scale-95 transition-all whitespace-nowrap cursor-pointer"
+            >
+              <ShoppingBag className="w-4 h-4 text-emerald-600" />
+              <span>Order Medicine (5km)</span>
+            </button>
+          )}
         </div>
 
         {/* Mobile Fast Action & Menu */}

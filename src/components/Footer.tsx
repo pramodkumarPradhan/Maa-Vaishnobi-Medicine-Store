@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BUSINESS_INFO } from "../data/businessInfo";
+import { useGoogleReviews } from "../hooks/useGoogleReviews";
 import { Phone, MessageCircle, MapPin, ExternalLink, Star } from "lucide-react";
 
 interface FooterProps {
@@ -8,6 +9,7 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenCallModal }) => {
+  const { score, reviewsCount, reviewsUrl } = useGoogleReviews();
   return (
     <footer className="bg-slate-900 text-slate-400 border-t border-slate-800">
       <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
@@ -66,18 +68,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCallModal }) => {
             </p>
             <div className="pt-2 flex flex-col gap-2.5">
               <a
-                href={BUSINESS_INFO.googleRating.reviewsUrl}
+                href={reviewsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-white hover:border-slate-700 transition-colors"
+                className="inline-flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-white hover:border-amber-400/50 transition-colors"
               >
                 <div className="flex items-center gap-1.5">
-                  <Star className="w-4 h-4 text-amber-gold fill-amber-gold" />
+                  <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
                   <span>
-                    Google Reviews ({BUSINESS_INFO.googleRating.score} ★ • {BUSINESS_INFO.googleRating.reviewsCount} Reviews)
+                    Google Reviews ({score.toFixed(1)} ★ • {reviewsCount} Reviews)
                   </span>
                 </div>
-                <ExternalLink className="w-4 h-4 text-amber-gold" />
+                <ExternalLink className="w-4 h-4 text-amber-400" />
               </a>
 
               <a

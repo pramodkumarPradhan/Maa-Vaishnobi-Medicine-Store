@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BUSINESS_INFO } from "../data/businessInfo";
-import { Home, UserCheck, Calendar, MessageCircle, Phone } from "lucide-react";
+import { Home, ShoppingBag, Calendar, MessageCircle, Phone } from "lucide-react";
 
 interface MobileStickyBarProps {
   onOpenAppointmentModal: () => void;
   onOpenCallModal?: () => void;
+  onOpenOrderMedicineModal?: () => void;
 }
 
-type TabId = "home" | "clinic" | "book" | "chat" | "call";
+type TabId = "home" | "order" | "book" | "chat" | "call";
 
 export const MobileStickyBar: React.FC<MobileStickyBarProps> = ({
   onOpenAppointmentModal,
   onOpenCallModal,
+  onOpenOrderMedicineModal,
 }) => {
   const [activeTab, setActiveTab] = useState<TabId>("home");
   const isNavigatingRef = useRef(false);
@@ -37,7 +39,7 @@ export const MobileStickyBar: React.FC<MobileStickyBarProps> = ({
           if (clinicSection) {
             const rect = clinicSection.getBoundingClientRect();
             if (rect.top <= 350 && rect.bottom >= 200) {
-              setActiveTab("clinic");
+              setActiveTab("order");
               ticking = false;
               return;
             }
@@ -89,14 +91,21 @@ export const MobileStickyBar: React.FC<MobileStickyBarProps> = ({
         <span className="text-[10px] font-bold mt-0.5 tracking-tight">Home</span>
       </a>
 
-      <a
-        href="#clinic"
-        onClick={() => handleTabClick("clinic")}
-        className={getTabClass("clinic")}
+      <button
+        onClick={() => {
+          handleTabClick("order");
+          if (onOpenOrderMedicineModal) {
+            onOpenOrderMedicineModal();
+          } else {
+            const elem = document.getElementById("order-medicine-5km");
+            if (elem) elem.scrollIntoView({ behavior: "smooth" });
+          }
+        }}
+        className={getTabClass("order")}
       >
-        <UserCheck className={getIconClass("clinic")} />
-        <span className="text-[10px] font-bold mt-0.5 tracking-tight">Clinic</span>
-      </a>
+        <ShoppingBag className={getIconClass("order")} />
+        <span className="text-[10px] font-bold mt-0.5 tracking-tight">Order 5km</span>
+      </button>
 
       <button
         onClick={() => {

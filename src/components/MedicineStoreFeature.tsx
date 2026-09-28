@@ -1,13 +1,15 @@
 import React from "react";
 import { BUSINESS_INFO } from "../data/businessInfo";
-import { Store, MessageCircle, Phone } from "lucide-react";
+import { Store, MessageCircle, Phone, ShoppingBag } from "lucide-react";
 
 interface MedicineStoreFeatureProps {
   onOpenCallModal?: () => void;
+  onOpenOrderMedicineModal?: () => void;
 }
 
 export const MedicineStoreFeature: React.FC<MedicineStoreFeatureProps> = ({
   onOpenCallModal,
+  onOpenOrderMedicineModal,
 }) => {
   return (
     <section className="py-16 sm:py-24 bg-[#f8fafc] border-b border-slate-200/80">
@@ -25,10 +27,20 @@ export const MedicineStoreFeature: React.FC<MedicineStoreFeatureProps> = ({
               </h2>
 
               <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-                Need to check medicine availability or have a pharmacy enquiry? Reach our team directly by phone or WhatsApp. We stock 100% genuine prescription medicines, OTC items, and surgical supplies for our community.
+                Need prescription medicines or OTC supplies? Order online directly through our website with express delivery within a <strong>5 KM radius</strong> from our Jail Road counter in Balasore!
               </p>
 
               <div className="flex flex-wrap items-center gap-4 pt-2">
+                {onOpenOrderMedicineModal && (
+                  <button
+                    onClick={onOpenOrderMedicineModal}
+                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-headline text-sm font-extrabold tracking-wide uppercase transition-all shadow-md active:scale-95 cursor-pointer"
+                  >
+                    <ShoppingBag className="w-4 h-4 text-slate-950" />
+                    <span>ORDER MEDICINE ONLINE (5 KM)</span>
+                  </button>
+                )}
+
                 <a
                   href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
                     "Hello Maa Vaishnobi Medicine Store, I would like to check availability for a medicine"

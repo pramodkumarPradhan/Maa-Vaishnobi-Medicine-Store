@@ -1,19 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
 import { BUSINESS_INFO } from "../data/businessInfo";
-import { Calendar, MessageCircle, Phone, MapPin, Star, Play, X, ShieldCheck, Stethoscope, Sparkles } from "lucide-react";
+import { useGoogleReviews } from "../hooks/useGoogleReviews";
+import { Calendar, MessageCircle, Phone, Star, Play, X, ShieldCheck, Stethoscope, Sparkles, ShoppingBag, Truck } from "lucide-react";
 
 interface HeroProps {
   onOpenAppointmentModal: () => void;
   onOpenCallModal?: () => void;
+  onOpenOrderMedicineModal?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   onOpenAppointmentModal,
   onOpenCallModal,
+  onOpenOrderMedicineModal,
 }) => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [showHelpTooltip, setShowHelpTooltip] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const { score, reviewsCount, reviewsUrl } = useGoogleReviews();
 
   useEffect(() => {
     if (videoRef.current) {
@@ -72,17 +76,17 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           <a
-            href={BUSINESS_INFO.googleRating.reviewsUrl}
+            href={reviewsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/80 text-xs text-amber-300 font-bold hover:bg-slate-800 backdrop-blur-md transition-all"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 text-xs text-amber-300 font-bold hover:bg-slate-800 backdrop-blur-md transition-all shadow-md"
           >
             <div className="flex items-center gap-0.5 text-amber-400">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3.5 h-3.5 fill-amber-400" />
+                <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
               ))}
             </div>
-            <span>{BUSINESS_INFO.googleRating.score} ★ ({BUSINESS_INFO.googleRating.reviewsCount}+ Reviews)</span>
+            <span>{score.toFixed(1)} ★ ({reviewsCount}+ Google Reviews)</span>
           </a>
         </div>
 
@@ -105,30 +109,40 @@ export const Hero: React.FC<HeroProps> = ({
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 100% Genuine Medicine Store
               </span>
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-xs font-bold text-emerald-300 backdrop-blur-sm animate-pulse">
+                <Truck className="w-4 h-4 text-emerald-400" />
+                Order Medicine Online (Within 5 KM Radius)
+              </span>
               <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-semibold text-teal-300 backdrop-blur-sm">
                 <Stethoscope className="w-4 h-4 text-teal-400" />
                 6+ Visiting Specialist OPDs
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-semibold text-sky-300 backdrop-blur-sm">
-                <MapPin className="w-4 h-4 text-sky-400" />
-                Jail Road, Balasore
               </span>
             </div>
 
             {/* Minimal Subtitle */}
             <p className="text-slate-300 text-base sm:text-lg font-medium leading-relaxed max-w-xl">
-              Complete prescription &amp; OTC medicine store counter with visiting specialist doctor OPD consultations daily on Jail Road, Balasore.
+              Complete prescription &amp; OTC medicine store counter with express local delivery within 5 KM radius and visiting specialist doctor OPD consultations daily on Jail Road, Balasore.
             </p>
 
-            {/* High Action Buttons */}
+            {/* High Action Buttons - Main Focus: OPD Patient Appointment */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <button
                 onClick={onOpenAppointmentModal}
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/25 active:scale-95 transition-all"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-400 hover:from-emerald-400 hover:to-sky-300 text-slate-950 font-extrabold text-sm uppercase tracking-wider shadow-xl shadow-emerald-500/25 active:scale-95 transition-all cursor-pointer"
               >
                 <Calendar className="w-5 h-5 text-slate-950" />
                 <span>Book Doctor Appointment</span>
               </button>
+
+              {onOpenOrderMedicineModal && (
+                <button
+                  onClick={onOpenOrderMedicineModal}
+                  className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-emerald-300 font-bold text-sm uppercase tracking-wider border border-emerald-500/40 backdrop-blur-md active:scale-95 transition-all cursor-pointer"
+                >
+                  <ShoppingBag className="w-5 h-5 text-emerald-400" />
+                  <span>Order Medicine (5 KM)</span>
+                </button>
+              )}
 
               <a
                 href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
@@ -136,10 +150,10 @@ export const Hero: React.FC<HeroProps> = ({
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-white font-bold text-sm uppercase tracking-wider border border-slate-700 backdrop-blur-md active:scale-95 transition-all"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 font-bold text-sm uppercase tracking-wider border border-slate-700 backdrop-blur-md active:scale-95 transition-all"
               >
                 <MessageCircle className="w-5 h-5 text-emerald-400" />
-                <span>WhatsApp Pharmacy</span>
+                <span>WhatsApp Desk</span>
               </a>
             </div>
 

@@ -212,15 +212,11 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   };
 
   const handleSendWhatsApp = () => {
-    const dateFormatted = preferredDate || "To be confirmed";
-    const reasonText = visitReason.trim() || "General Consultation";
-    const notesText = additionalNotes.trim() || "None";
-
     const doctorDetailsLine = selectedDoctor
-      ? `Requested Doctor: ${selectedDoctor.name} (${selectedDoctor.title})\nOPD Timing: ${selectedDoctor.availabilityNote}`
-      : `Doctor / Specialty: ${selectedSpecialty}`;
+      ? `Requested Doctor: ${selectedDoctor.name} (${selectedDoctor.title})`
+      : `Requested Doctor: ${selectedSpecialty || "General Consultation"}`;
 
-    const messageText = `Hello Maa Vaishnobi Medicine Store & Clinic,\nI would like to request a doctor consultation.\n\nPatient Name: ${patientName.trim()}\nPhone: ${patientPhone.trim()}\nAge/Gender: ${patientAge ? `${patientAge} yrs` : "N/A"} / ${patientGender}\nHealth Concern: ${selectedConcern.name}\n${doctorDetailsLine}\nPreferred Date: ${dateFormatted}\nPreferred Time: ${selectedTimeSlot}\nReason: ${reasonText}\nAdditional Notes: ${notesText}\n\nPlease confirm OPD availability and token number.\nThank you.`;
+    const messageText = `Hello Maa Vaishnobi Medicine Store & Clinic\nPatient Name: ${patientName.trim()}\nPhone: ${patientPhone.trim()}\nHealth Concern: ${selectedConcern.name}\n${doctorDetailsLine}`;
 
     const encoded = encodeURIComponent(messageText);
     const whatsappUrl = `${BUSINESS_INFO.whatsappUrl}?text=${encoded}`;
