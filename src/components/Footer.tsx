@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BUSINESS_INFO } from "../data/businessInfo";
 import { useGoogleReviews } from "../hooks/useGoogleReviews";
-import { Phone, MessageCircle, MapPin, ExternalLink, Star, Mail } from "lucide-react";
+import { Phone, MessageCircle, MapPin, ExternalLink, Star } from "lucide-react";
 
 interface FooterProps {
   onOpenCallModal?: () => void;
