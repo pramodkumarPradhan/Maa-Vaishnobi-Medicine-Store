@@ -44,6 +44,11 @@ export interface BusinessInfo {
     ambulance: string;
     nationalEmergency: string;
   };
+  email: string;
+  developer: {
+    name: string;
+    email: string;
+  };
   effectiveDate: string;
 }
 
@@ -93,6 +98,11 @@ export const BUSINESS_INFO: BusinessInfo = {
   emergencyNumbers: {
     ambulance: "108",
     nationalEmergency: "112",
+  },
+  email: "promodpradhan369@gmail.com",
+  developer: {
+    name: "DevloperPramod",
+    email: "promodpradhan369@gmail.com",
   },
   effectiveDate: "September 2026",
 };

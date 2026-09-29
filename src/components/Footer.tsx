@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BUSINESS_INFO } from "../data/businessInfo";
 import { useGoogleReviews } from "../hooks/useGoogleReviews";
-import { Phone, MessageCircle, MapPin, ExternalLink, Star } from "lucide-react";
+import { Phone, MessageCircle, MapPin, ExternalLink, Star, Mail } from "lucide-react";
 
 interface FooterProps {
   onOpenCallModal?: () => void;
@@ -29,9 +29,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCallModal }) => {
             <p className="text-sm text-slate-400 leading-relaxed max-w-md">
               Delivering 100% genuine medicine store services and structured specialist doctor OPD consultation support for residents of Balasore, Gopalgoan, and neighboring Odisha communities.
             </p>
-            <div className="space-y-1.5 text-sm pt-1">
+            <div className="space-y-2 text-sm pt-1">
               <p className="flex items-center gap-2 text-slate-300">
-                <Phone className="w-4 h-4 text-sky-400" />
+                <Phone className="w-4 h-4 text-sky-400 shrink-0" />
                 <a href={BUSINESS_INFO.phone1Tel} className="hover:text-white font-medium">
                   +91 {BUSINESS_INFO.phone1}
                 </a>
@@ -40,8 +40,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCallModal }) => {
                   +91 {BUSINESS_INFO.phone2}
                 </a>
               </p>
+              {/* <p className="flex items-center gap-2 text-slate-300">
+                <Mail className="w-4 h-4 text-sky-400 shrink-0" />
+                <a href={`mailto:${BUSINESS_INFO.email}`} className="hover:text-white font-medium">
+                  {BUSINESS_INFO.email}
+                </a>
+              </p> */}
               <p className="flex items-center gap-2 text-slate-300">
-                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
                 <a
                   href={BUSINESS_INFO.whatsappUrl}
                   target="_blank"
@@ -103,25 +109,33 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCallModal }) => {
           </div>
         </div>
 
-        {/* Legal Notices & Copyright */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>
-            © {new Date().getFullYear()} {BUSINESS_INFO.name}. All rights reserved. {BUSINESS_INFO.address.fullFormatted}.
-          </p>
+        {/* Legal Notices & Copyright Bar */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <div className="space-y-1 text-center md:text-left">
+            <p>
+              Copyright © {new Date().getFullYear()} maavaishnobimedicinestoreandclinic. All rights reserved.
+            </p>
+            <p className="text-slate-500">
+              Powered by{" "}
+              <a
+                href={`mailto:${BUSINESS_INFO.developer.email}`}
+                className="text-sky-400 hover:underline font-semibold"
+              >
+                {BUSINESS_INFO.developer.name}
+              </a>{" "}
+              (<a href={`mailto:${BUSINESS_INFO.developer.email}`} className="hover:underline text-slate-400">{BUSINESS_INFO.developer.email}</a>)
+            </p>
+          </div>
 
           <div className="flex items-center gap-4 text-slate-400">
-            <Link to="/privacy-policy" className="hover:underline">
+            <Link to="/privacy-policy" className="hover:underline hover:text-white">
               Privacy Policy
             </Link>
             <span>•</span>
-            <Link to="/disclaimer" className="hover:underline">
+            <Link to="/disclaimer" className="hover:underline hover:text-white">
               Disclaimer
             </Link>
           </div>
-
-          <p className="max-w-md text-center md:text-right">
-            Disclaimer: Information provided is for store enquiries and outpatient consultation scheduling. In medical emergencies, please visit the nearest hospital emergency room.
-          </p>
         </div>
       </div>
     </footer>
