@@ -101,7 +101,7 @@ export const BUSINESS_INFO: BusinessInfo = {
   },
   email: "promodpradhan369@gmail.com",
   developer: {
-    name: "DevloperPramod",
+    name: "Pramod",
     email: "promodpradhan369@gmail.com",
   },
   effectiveDate: "September 2026",

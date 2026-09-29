@@ -113,26 +113,35 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCallModal }) => {
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="space-y-1 text-center md:text-left">
             <p>
-              Copyright © {new Date().getFullYear()} maavaishnobimedicinestoreandclinic. All rights reserved.
+              Copyright © {new Date().getFullYear()} Maa Vaishnobi Medicine Store & Clinic.
+              All rights reserved.
             </p>
+
             <p className="text-slate-500">
-              Powered by{" "}
+              Designed & Developed by{" "}
               <a
                 href={`mailto:${BUSINESS_INFO.developer.email}`}
                 className="text-sky-400 hover:underline font-semibold"
               >
                 {BUSINESS_INFO.developer.name}
-              </a>{" "}
-              (<a href={`mailto:${BUSINESS_INFO.developer.email}`} className="hover:underline text-slate-400">{BUSINESS_INFO.developer.email}</a>)
+              </a>
             </p>
           </div>
 
           <div className="flex items-center gap-4 text-slate-400">
-            <Link to="/privacy-policy" className="hover:underline hover:text-white">
+            <Link
+              to="/privacy-policy"
+              className="hover:underline hover:text-white"
+            >
               Privacy Policy
             </Link>
+
             <span>•</span>
-            <Link to="/disclaimer" className="hover:underline hover:text-white">
+
+            <Link
+              to="/disclaimer"
+              className="hover:underline hover:text-white"
+            >
               Disclaimer
             </Link>
           </div>
