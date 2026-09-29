@@ -100,7 +100,7 @@ Thank you!`;
             <input
               type="text"
               required
-              placeholder="e.g. Pramod Kumar"
+              placeholder="Full Name"
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none text-sm text-slate-900 font-medium"
@@ -115,7 +115,7 @@ Thank you!`;
             <input
               type="tel"
               required
-              placeholder="e.g. 9827439139"
+              placeholder="Mobile"
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none text-sm text-slate-900 font-medium"
@@ -130,7 +130,7 @@ Thank you!`;
             <input
               type="text"
               required
-              placeholder="e.g. Jail Road, near Manikhamb circle, Balasore"
+              placeholder="Delivery Address"
               value={deliveryAddress}
               onChange={(e) => setDeliveryAddress(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none text-sm text-slate-900 font-medium"
@@ -155,7 +155,7 @@ Thank you!`;
             </label>
             <textarea
               rows={3}
-              placeholder="e.g. Paracetamol 500mg - 1 strip, Volini spray - 1 bottle, Pantop 40mg - 1 strip"
+              placeholder="Medicine Names"
               value={medicineList}
               onChange={(e) => setMedicineList(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none text-sm text-slate-900 font-medium"

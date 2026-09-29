@@ -3,15 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { OnlineMedicineSection } from "./components/OnlineMedicineSection";
-import { PhotoGallerySection } from "./components/PhotoGallerySection";
 import { QuickActionBar } from "./components/QuickActionBar";
-import { About } from "./components/About";
 import { Services } from "./components/Services";
 import { MedicineStoreFeature } from "./components/MedicineStoreFeature";
-import { DoctorConsultationFeature } from "./components/DoctorConsultationFeature";
 import { VisitingDoctorsSection } from "./components/VisitingDoctorsSection";
 import { ReviewsSection } from "./components/ReviewsSection";
-import { FaqSection } from "./components/FaqSection";
 import { LocationSection } from "./components/LocationSection";
 import { FinalCTA } from "./components/FinalCTA";
 import { Footer } from "./components/Footer";
@@ -52,20 +48,20 @@ const HomePage: React.FC<{
         <OnlineMedicineSection onOpenOrderModal={onOpenOrderMedicineModal} />
 
         {/* TOP FOCUS: OPD Doctor Consultation & Visiting Specialist Doctors */}
-        <DoctorConsultationFeature onOpenAppointmentModal={() => onOpenModal()} />
+        {/* <DoctorConsultationFeature onOpenAppointmentModal={() => onOpenModal()} />   */}
 
-        <VisitingDoctorsSection
-          onSelectDoctorToBook={(doctorId) => onOpenModal(doctorId)}
-          onOpenCallModal={onOpenCallModal}
-        />
+          <VisitingDoctorsSection
+            onSelectDoctorToBook={(doctorId) => onOpenModal(doctorId)}
+            onOpenCallModal={onOpenCallModal}
+          />
 
 
-        <PhotoGallerySection
+        {/* <PhotoGallerySection
           onOpenAppointmentModal={() => onOpenModal()}
           onOpenCallModal={onOpenCallModal}
-        />
+        /> */}
 
-        <About />
+        {/* <About /> */}
 
         <Services
           onOpenAppointmentModal={() => onOpenModal()}
@@ -79,10 +75,10 @@ const HomePage: React.FC<{
         <ReviewsSection />
         
         {/* FAQ Section - Rich Snippets & Local SEO Search Boost */}
-        <FaqSection
+        {/* <FaqSection
           onOpenAppointmentModal={() => onOpenModal()}
           onOpenOrderMedicineModal={onOpenOrderMedicineModal}
-        />
+        /> */}
 
         <LocationSection onOpenCallModal={onOpenCallModal} />
         <FinalCTA

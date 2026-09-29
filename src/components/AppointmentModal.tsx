@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BUSINESS_INFO } from "../data/businessInfo";
 import {
   HEALTH_CONCERNS,
-  SPECIALTIES,
-  TIME_SLOTS,
+  // SPECIALTIES,
   VISITING_DOCTORS_REGISTRY,
   type HealthConcern,
   type VisitingDoctor,
@@ -12,7 +11,6 @@ import {
   X,
   Search,
   CheckCircle2,
-  Clock,
   Phone,
   MessageCircle,
   ArrowLeft,
@@ -30,9 +28,6 @@ import {
   Eye,
   Ear,
   MoreHorizontal,
-  Sun,
-  Sunset,
-  Moon,
 } from "lucide-react";
 
 interface AppointmentModalProps {
@@ -57,30 +52,10 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   const [selectedDoctor, setSelectedDoctor] = useState<VisitingDoctor | null>(
     null
   );
-  const [preferredDate, setPreferredDate] = useState<string>("");
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>(
-    "Morning (09:30 AM - 12:30 PM)"
-  );
-
-  // Initialize selected doctor when initialDoctorId is passed or modal opens
-  useEffect(() => {
-    if (initialDoctorId) {
-      const matched = VISITING_DOCTORS_REGISTRY.find(
-        (d) => d.id === initialDoctorId
-      );
-      if (matched) {
-        setSelectedDoctor(matched);
-        setSelectedSpecialty(`${matched.name} — ${matched.title}`);
-        setStep(2);
-      }
-    }
-  }, [initialDoctorId, isOpen]);
 
   // Form State
   const [patientName, setPatientName] = useState<string>("");
   const [patientPhone, setPatientPhone] = useState<string>("");
-  const [patientAge, setPatientAge] = useState<string>("");
-  const [patientGender, setPatientGender] = useState<string>("Male");
   const [visitReason, setVisitReason] = useState<string>("");
   const [additionalNotes, setAdditionalNotes] = useState<string>("");
 
@@ -88,13 +63,32 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   const [nameError, setNameError] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<boolean>(false);
 
-  // Initialize date picker on load
+  // Initialize selected doctor when initialDoctorId is passed or modal opens
   useEffect(() => {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const formattedTomorrow = tomorrow.toISOString().split("T")[0];
-    setPreferredDate(formattedTomorrow);
-  }, []);
+    if (initialDoctorId && isOpen) {
+      const matched = VISITING_DOCTORS_REGISTRY.find(
+        (d) => d.id === initialDoctorId
+      );
+      if (matched) {
+        setSelectedDoctor(matched);
+        setSelectedSpecialty(`${matched.name} — ${matched.title}`);
+        const matchedConcern = HEALTH_CONCERNS.find(
+          (c) =>
+            (c.id === "skin" && matched.specialtyId === "dermatology") ||
+            (c.id === "child" && matched.specialtyId === "pediatrics") ||
+            (c.id === "mental" && matched.specialtyId === "psychiatry") ||
+            (c.id === "women" && matched.specialtyId === "gynecology") ||
+            (c.id === "oncology" && matched.specialtyId === "oncology") ||
+            (c.id === "urology" && matched.specialtyId === "urology") ||
+            c.id === matched.specialtyId
+        );
+        if (matchedConcern) {
+          setSelectedConcern(matchedConcern);
+        }
+        setStep(2);
+      }
+    }
+  }, [initialDoctorId, isOpen]);
 
   // Escape key handler
   useEffect(() => {
@@ -148,31 +142,41 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     }
   };
 
-  const getTimeIcon = (iconName: string) => {
-    switch (iconName) {
-      case "Sun":
-        return <Sun className="w-4 h-4" />;
-      case "Sunset":
-        return <Sunset className="w-4 h-4" />;
-      case "Moon":
-        return <Moon className="w-4 h-4" />;
-      default:
-        return <Clock className="w-4 h-4" />;
-    }
-  };
-
-  // Filtered health concerns
+  // Filtered health concerns for search
   const filteredConcerns = HEALTH_CONCERNS.filter(
     (item) =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase().trim()) ||
       item.category.toLowerCase().includes(searchQuery.toLowerCase().trim())
   );
 
+  // Filter doctors based strictly on selected disease/health concern
+  const filteredDoctors = VISITING_DOCTORS_REGISTRY.filter((doc) => {
+    if (selectedConcern.id === "skin") return doc.specialtyId === "dermatology";
+    if (selectedConcern.id === "child") return doc.specialtyId === "pediatrics";
+    if (selectedConcern.id === "mental") return doc.specialtyId === "psychiatry";
+    if (selectedConcern.id === "women") return doc.specialtyId === "gynecology";
+    if (selectedConcern.id === "oncology") return doc.specialtyId === "oncology";
+    if (selectedConcern.id === "urology") return doc.specialtyId === "urology";
+    return doc.specialtyId === selectedConcern.id;
+  });
+
+  const displayDoctors =
+    filteredDoctors.length > 0 ? filteredDoctors : VISITING_DOCTORS_REGISTRY;
+
   const handleSelectConcern = (concern: HealthConcern) => {
     setSelectedConcern(concern);
-    const matchedDoc = VISITING_DOCTORS_REGISTRY.find(
-      (d) => d.specialtyId === concern.id || d.department.toLowerCase().includes(concern.name.toLowerCase().split(" ")[0])
-    );
+
+    // Auto-select matching doctor for this concern
+    const matchedDoc = VISITING_DOCTORS_REGISTRY.find((d) => {
+      if (concern.id === "skin") return d.specialtyId === "dermatology";
+      if (concern.id === "child") return d.specialtyId === "pediatrics";
+      if (concern.id === "mental") return d.specialtyId === "psychiatry";
+      if (concern.id === "women") return d.specialtyId === "gynecology";
+      if (concern.id === "oncology") return d.specialtyId === "oncology";
+      if (concern.id === "urology") return d.specialtyId === "urology";
+      return d.specialtyId === concern.id;
+    });
+
     if (matchedDoc) {
       setSelectedDoctor(matchedDoc);
       setSelectedSpecialty(`${matchedDoc.name} — ${matchedDoc.title}`);
@@ -183,7 +187,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   };
 
   const handleNextStep = () => {
-    if (step === 4) {
+    if (step === 3) {
       let hasError = false;
       if (!patientName.trim()) {
         setNameError(true);
@@ -200,7 +204,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
       if (hasError) return;
     }
 
-    if (step < 5) {
+    if (step < 4) {
       setStep(step + 1);
     }
   };
@@ -254,22 +258,21 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
           </button>
         </div>
 
-        {/* Step Progress Bar */}
+        {/* Step Progress Bar (4 Steps Flow) */}
         <div className="pt-3 pb-2 shrink-0">
           <div className="flex items-center justify-between text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
             <span>
               {step === 1 && "01 Health Concern"}
               {step === 2 && "02 Doctor / Specialty"}
-              {step === 3 && "03 Date & Time"}
-              {step === 4 && "04 Your Details"}
-              {step === 5 && "05 WhatsApp Request"}
+              {step === 3 && "03 Your Details"}
+              {step === 4 && "04 WhatsApp Request"}
             </span>
-            <span className="text-primary font-bold">Step {step} of 5</span>
+            <span className="text-primary font-bold">Step {step} of 4</span>
           </div>
           <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
             <div
               className="bg-primary h-full transition-all duration-300 rounded-full"
-              style={{ width: `${step * 20}%` }}
+              style={{ width: `${step * 25}%` }}
             ></div>
           </div>
         </div>
@@ -348,27 +351,27 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
             </div>
           )}
 
-          {/* STEP 2: DOCTOR / SPECIALTY MATCHING */}
+          {/* STEP 2: SPECIFIC DOCTOR MATCHED TO DISEASE */}
           {step === 2 && (
             <div className="space-y-4">
               <div>
                 <h4 className="font-display text-lg sm:text-xl font-bold text-slate-900">
-                  Select Visiting Doctor & Specialty
+                  Selected Doctor for {selectedConcern.name}
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                  Selected Health Query:{" "}
+                  Showing specialist doctor for:{" "}
                   <span className="font-bold text-primary">
                     {selectedConcern.name}
                   </span>
                 </p>
               </div>
 
-              {/* Doctor Card Grid Selector */}
-              <div className="space-y-2 max-h-[300px] overflow-y-auto pr-1">
+              {/* Doctor Card Grid Selector (Filtered to specific doctor for disease) */}
+              <div className="space-y-2 max-h-[320px] overflow-y-auto pr-1">
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
-                  Choose Visiting Doctor
+                  Visiting Specialist Doctor
                 </label>
-                {VISITING_DOCTORS_REGISTRY.map((doc) => {
+                {displayDoctors.map((doc) => {
                   const isSelected =
                     selectedDoctor?.id === doc.id ||
                     selectedSpecialty.includes(doc.name);
@@ -380,58 +383,57 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                         setSelectedDoctor(doc);
                         setSelectedSpecialty(`${doc.name} — ${doc.title}`);
                       }}
-                      className={`p-3.5 rounded-2xl border-2 cursor-pointer transition-all flex items-start justify-between gap-3 ${
+                      className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex items-start justify-between gap-3 ${
                         isSelected
-                          ? "border-primary bg-sky-50/80 shadow-md"
+                          ? "border-primary bg-sky-50/80 shadow-md ring-2 ring-primary/20"
                           : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"
                       }`}
                     >
-                      <div className="flex items-start gap-3">
+                      <div className="flex items-start gap-3.5">
                         {doc.photoUrl ? (
                           <img
                             src={doc.photoUrl}
                             alt={doc.name}
-                            className="w-11 h-11 rounded-xl object-cover shrink-0 border border-slate-200 shadow-sm"
+                            className="w-12 h-12 rounded-xl object-cover shrink-0 border border-slate-200 shadow-sm"
                           />
                         ) : (
                           <div
-                            className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold shrink-0 ${
+                            className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold shrink-0 ${
                               isSelected
                                 ? "bg-primary text-white"
                                 : "bg-slate-100 text-slate-600"
                             }`}
                           >
-                            <Stethoscope className="w-5 h-5" />
+                            <Stethoscope className="w-6 h-6" />
                           </div>
                         )}
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="text-sm font-bold text-slate-900">
+                            <span className="text-sm sm:text-base font-bold text-slate-900">
                               {doc.name}
                             </span>
                             <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-sky-100 text-sky-800">
                               {doc.department}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-600 font-medium mt-0.5">
+                          <p className="text-xs text-slate-700 font-semibold mt-0.5">
                             {doc.title} {doc.qualifications && `• ${doc.qualifications}`}
                           </p>
-                          <p className="text-[11px] text-slate-500 mt-1 flex items-center gap-1 font-mono">
-                            <Clock className="w-3 h-3 text-sky-600" />
-                            <span>{doc.availabilityNote}</span>
+                          <p className="text-[11px] text-slate-500 mt-1 font-medium">
+                            {doc.availabilityNote}
                           </p>
                         </div>
                       </div>
                       {isSelected && (
-                        <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-1" />
+                        <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-1" />
                       )}
                     </div>
                   );
                 })}
               </div>
 
-              {/* Department Fallback Selector */}
-              <div className="pt-2 border-t border-slate-100">
+              {/* Department Fallback Selector if needed */}
+              {/* <div className="pt-2 border-t border-slate-100">
                 <label
                   htmlFor="specialtySelect"
                   className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1"
@@ -445,7 +447,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     setSelectedSpecialty(e.target.value);
                     setSelectedDoctor(null);
                   }}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-primary bg-white"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-primary bg-white font-medium"
                 >
                   {SPECIALTIES.map((spec) => (
                     <option key={spec.id} value={spec.name}>
@@ -453,22 +455,22 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
 
-              {/* Fast Fallback Box */}
+              {/* Quick Contact Box */}
               <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
                 <div>
                   <span className="font-bold text-slate-800">
-                    Unsure about which doctor to pick?
+                    Need help with doctor schedule?
                   </span>
                   <p className="text-slate-500 text-[11px]">
-                    Chat with our dispensary team directly for instant direction.
+                    Chat with our clinic reception directly for doctor availability.
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <a
                     href={`${BUSINESS_INFO.whatsappUrl}?text=${encodeURIComponent(
-                      "Hello Maa Vaishnobi Clinic, I need help choosing a doctor specialty"
+                      `Hello Maa Vaishnobi Clinic, I need information about doctor availability for ${selectedConcern.name}`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -489,198 +491,79 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
             </div>
           )}
 
-          {/* STEP 3: PREFERRED DATE & TIME */}
+          {/* STEP 3: PATIENT DETAILS (Age and Gender Removed) */}
           {step === 3 && (
             <div className="space-y-4">
               <div>
                 <h4 className="font-display text-lg sm:text-xl font-bold text-slate-900">
-                  Choose Your Preferred Date &amp; Time
+                  Your Contact Details
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                  Select when you would prefer your outpatient visit.
-                </p>
-              </div>
-
-              {/* Date Input */}
-              <div>
-                <label
-                  htmlFor="preferredDateInput"
-                  className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1"
-                >
-                  Preferred Date <span className="text-red-500">*</span>
-                </label>
-                <input
-                  id="preferredDateInput"
-                  type="date"
-                  value={preferredDate}
-                  min={new Date().toISOString().split("T")[0]}
-                  onChange={(e) => setPreferredDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-primary"
-                  required
-                />
-              </div>
-
-              {/* Time Slots */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                  Preferred Time <span className="text-red-500">*</span>
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                  {TIME_SLOTS.map((slot) => {
-                    const fullSlotName = `${slot.label} (${slot.timeRange})`;
-                    const isSelected = selectedTimeSlot === fullSlotName;
-                    return (
-                      <button
-                        key={slot.id}
-                        type="button"
-                        onClick={() => setSelectedTimeSlot(fullSlotName)}
-                        className={`p-3 rounded-xl border text-left font-medium transition-all ${
-                          isSelected
-                            ? "border-primary bg-sky-50 text-slate-900"
-                            : "border-slate-200 bg-white text-slate-900 hover:border-slate-300"
-                        }`}
-                      >
-                        <div className="flex items-center gap-1.5 text-xs font-bold text-primary">
-                          {getTimeIcon(slot.iconName)}
-                          <span>{slot.label}</span>
-                        </div>
-                        <div className="text-[11px] text-slate-600 mt-1">
-                          {slot.timeRange}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                Note: Consultation timings are subject to visiting doctor schedule confirmation.
-              </p>
-            </div>
-          )}
-
-          {/* STEP 4: PATIENT DETAILS */}
-          {step === 4 && (
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-display text-lg sm:text-xl font-bold text-slate-900">
-                  Your Details
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                  Please provide patient information for appointment registration.
+                  Please enter patient name and mobile number.
                 </p>
               </div>
 
               <div className="space-y-3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {/* Full Name */}
-                  <div>
-                    <label
-                      htmlFor="patientName"
-                      className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1"
-                    >
-                      Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      id="patientName"
-                      type="text"
-                      value={patientName}
-                      onChange={(e) => {
-                        setPatientName(e.target.value);
-                        if (e.target.value.trim()) setNameError(false);
-                      }}
-                      placeholder="e.g. Ramesh Chandra Das"
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:ring-2 focus:ring-primary ${
-                        nameError
-                          ? "border-red-500 ring-2 ring-red-200"
-                          : "border-slate-300 focus:border-primary"
-                      }`}
-                      required
-                    />
-                    {nameError && (
-                      <span className="text-[11px] text-red-500 font-medium">
-                        Full Name is required
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Phone Number */}
-                  <div>
-                    <label
-                      htmlFor="patientPhone"
-                      className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1"
-                    >
-                      Phone Number <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      id="patientPhone"
-                      type="tel"
-                      value={patientPhone}
-                      onChange={(e) => {
-                        setPatientPhone(e.target.value);
-                        if (e.target.value.trim()) setPhoneError(false);
-                      }}
-                      placeholder="e.g. 9827439139"
-                      className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:ring-2 focus:ring-primary ${
-                        phoneError
-                          ? "border-red-500 ring-2 ring-red-200"
-                          : "border-slate-300 focus:border-primary"
-                      }`}
-                      required
-                    />
-                    {phoneError && (
-                      <span className="text-[11px] text-red-500 font-medium">
-                        Phone Number is required
-                      </span>
-                    )}
-                  </div>
+                {/* Full Name */}
+                <div>
+                  <label
+                    htmlFor="patientName"
+                    className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1"
+                  >
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="patientName"
+                    type="text"
+                    value={patientName}
+                    onChange={(e) => {
+                      setPatientName(e.target.value);
+                      if (e.target.value.trim()) setNameError(false);
+                    }}
+                    placeholder="Full Name"
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:ring-2 focus:ring-primary ${
+                      nameError
+                        ? "border-red-500 ring-2 ring-red-200"
+                        : "border-slate-300 focus:border-primary"
+                    }`}
+                    required
+                  />
+                  {nameError && (
+                    <span className="text-[11px] text-red-500 font-medium mt-0.5 block">
+                      Full Name is required
+                    </span>
+                  )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {/* Age */}
-                  <div>
-                    <label
-                      htmlFor="patientAge"
-                      className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1"
-                    >
-                      Age (Years)
-                    </label>
-                    <input
-                      id="patientAge"
-                      type="number"
-                      min="1"
-                      max="120"
-                      value={patientAge}
-                      onChange={(e) => setPatientAge(e.target.value)}
-                      placeholder="e.g. 34"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-primary"
-                    />
-                  </div>
-
-                  {/* Gender */}
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-                      Gender
-                    </label>
-                    <div className="flex items-center gap-3 pt-2">
-                      {["Male", "Female", "Other"].map((g) => (
-                        <label
-                          key={g}
-                          className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-slate-700 cursor-pointer"
-                        >
-                          <input
-                            type="radio"
-                            name="patientGender"
-                            value={g}
-                            checked={patientGender === g}
-                            onChange={() => setPatientGender(g)}
-                            className="text-primary focus:ring-primary"
-                          />
-                          <span>{g}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
+                {/* Phone Number */}
+                <div>
+                  <label
+                    htmlFor="patientPhone"
+                    className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1"
+                  >
+                    Phone / Mobile Number <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="patientPhone"
+                    type="tel"
+                    value={patientPhone}
+                    onChange={(e) => {
+                      setPatientPhone(e.target.value);
+                      if (e.target.value.trim()) setPhoneError(false);
+                    }}
+                    placeholder="Mobile Number"
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:ring-2 focus:ring-primary ${
+                      phoneError
+                        ? "border-red-500 ring-2 ring-red-200"
+                        : "border-slate-300 focus:border-primary"
+                    }`}
+                    required
+                  />
+                  {phoneError && (
+                    <span className="text-[11px] text-red-500 font-medium mt-0.5 block">
+                      Phone Number is required
+                    </span>
+                  )}
                 </div>
 
                 {/* Reason for Visit */}
@@ -689,25 +572,25 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     htmlFor="visitReason"
                     className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1"
                   >
-                    Reason for Visit
+                    Reason for Visit (Optional)
                   </label>
                   <input
                     id="visitReason"
                     type="text"
                     value={visitReason}
                     onChange={(e) => setVisitReason(e.target.value)}
-                    placeholder="e.g. Ongoing fever, prescription review, general health check"
+                    placeholder="e.g. Skin itching, child fever checkup"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
-                {/* Additional Notes */}
+                {/* Additional Message / Notes */}
                 <div>
                   <label
                     htmlFor="additionalNotes"
                     className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1"
                   >
-                    Additional Message / Notes
+                    Additional Message (Optional)
                   </label>
                   <textarea
                     id="additionalNotes"
@@ -722,8 +605,8 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
             </div>
           )}
 
-          {/* STEP 5: PREVIEW & SUBMISSION */}
-          {step === 5 && (
+          {/* STEP 4: PREVIEW & WHATSAPP SUBMISSION */}
+          {step === 4 && (
             <div className="space-y-4">
               <div>
                 <h4 className="font-display text-lg sm:text-xl font-bold text-slate-900">
@@ -737,38 +620,34 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
               {/* Summary Card */}
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm space-y-2.5">
                 <div className="flex justify-between border-b border-slate-200 pb-2">
-                  <span className="text-slate-500">Patient Name:</span>
+                  <span className="text-slate-500 font-medium">Patient Name:</span>
                   <span className="font-bold text-slate-900">
                     {patientName || "-"}
                   </span>
                 </div>
                 <div className="flex justify-between border-b border-slate-200 pb-2">
-                  <span className="text-slate-500">Phone Number:</span>
+                  <span className="text-slate-500 font-medium">Phone Number:</span>
                   <span className="font-bold text-slate-900">
                     {patientPhone || "-"}
                   </span>
                 </div>
                 <div className="flex justify-between border-b border-slate-200 pb-2">
-                  <span className="text-slate-500">Health Concern:</span>
+                  <span className="text-slate-500 font-medium">Health Concern:</span>
                   <span className="font-bold text-slate-900">
                     {selectedConcern.name}
                   </span>
                 </div>
                 <div className="flex justify-between border-b border-slate-200 pb-2">
-                  <span className="text-slate-500">Doctor / Specialty:</span>
+                  <span className="text-slate-500 font-medium">Requested Doctor:</span>
                   <span className="font-bold text-primary">
-                    {selectedSpecialty}
-                  </span>
-                </div>
-                <div className="flex justify-between border-b border-slate-200 pb-2">
-                  <span className="text-slate-500">Preferred Date &amp; Time:</span>
-                  <span className="font-bold text-slate-900">
-                    {preferredDate || "To be confirmed"} ({selectedTimeSlot})
+                    {selectedDoctor
+                      ? `${selectedDoctor.name} (${selectedDoctor.title})`
+                      : selectedSpecialty}
                   </span>
                 </div>
                 {visitReason && (
                   <div className="flex justify-between border-b border-slate-200 pb-2">
-                    <span className="text-slate-500">Reason:</span>
+                    <span className="text-slate-500 font-medium">Reason:</span>
                     <span className="font-medium text-slate-800 text-right max-w-[240px]">
                       {visitReason}
                     </span>
@@ -776,7 +655,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                 )}
                 {additionalNotes && (
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Additional Message:</span>
+                    <span className="text-slate-500 font-medium">Additional Message:</span>
                     <span className="font-medium text-slate-800 text-right max-w-[240px]">
                       {additionalNotes}
                     </span>
@@ -790,7 +669,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                   <span>Ready to Send</span>
                 </div>
                 <p className="mt-1">
-                  Clicking below opens WhatsApp with all your consultation details formatted for our front desk reception.
+                  Clicking below opens WhatsApp with all your consultation details formatted for our reception team.
                 </p>
               </div>
             </div>
@@ -812,7 +691,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
             <div></div>
           )}
 
-          {step < 5 ? (
+          {step < 4 ? (
             <button
               onClick={handleNextStep}
               type="button"
@@ -836,3 +715,4 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     </div>
   );
 };
+
