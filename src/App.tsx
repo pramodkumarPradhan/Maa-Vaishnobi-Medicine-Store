@@ -11,6 +11,7 @@ import { MedicineStoreFeature } from "./components/MedicineStoreFeature";
 import { DoctorConsultationFeature } from "./components/DoctorConsultationFeature";
 import { VisitingDoctorsSection } from "./components/VisitingDoctorsSection";
 import { ReviewsSection } from "./components/ReviewsSection";
+import { FaqSection } from "./components/FaqSection";
 import { LocationSection } from "./components/LocationSection";
 import { FinalCTA } from "./components/FinalCTA";
 import { Footer } from "./components/Footer";
@@ -76,6 +77,13 @@ const HomePage: React.FC<{
           onOpenOrderMedicineModal={onOpenOrderMedicineModal}
         />
         <ReviewsSection />
+        
+        {/* FAQ Section - Rich Snippets & Local SEO Search Boost */}
+        <FaqSection
+          onOpenAppointmentModal={() => onOpenModal()}
+          onOpenOrderMedicineModal={onOpenOrderMedicineModal}
+        />
+
         <LocationSection onOpenCallModal={onOpenCallModal} />
         <FinalCTA
           onOpenAppointmentModal={() => onOpenModal()}
